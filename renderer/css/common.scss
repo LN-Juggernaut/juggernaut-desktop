@@ -1,0 +1,88 @@
+.page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  margin: 0 auto;
+  background-color: $page-bg-color;
+}
+
+.fixed-header {
+  position: relative;
+}
+
+.scrollable-content {
+  flex-grow: 1;
+  min-height: 0;
+  overflow: auto;
+}
+
+.fixed-header-content {
+  background: $fixed-header-background;
+  margin: 0 auto;
+  color: white;
+  border-radius: 15px;
+  margin-top: 15px;
+  padding: 25px;
+  text-align: left;
+}
+
+.fixed-header-content-text {
+  width: calc(100vw - 400px);
+}
+
+.fixed-header-content-image .fixed-header-image-component {
+  position: absolute;
+  bottom: 15px;
+  right: 50px;
+}
+.fixed-header-content .title {
+  text-transform: uppercase;
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.fixed-header-content .details {
+  min-height: 54px;
+}
+
+.elevated-search {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.search-elevation {
+  border-radius: 10px;
+}
+
+.search-wrapper {
+  position: relative;
+}
+
+.elevated-search .search-wrapper i {
+  position: absolute;
+  top: 13px;
+  left: 10px;
+  color: $elevated-search-icon-color;
+}
+
+.elevated-search input {
+  width: 100%;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background-color: $elevated-search-bg-color;
+  color: $elevated-search-text-color;
+  padding: 15px;
+  height: 50px;
+  border: none;
+  font-size: 17px;
+  padding-left: 40px;
+}
+
+.elevated-search .mdc-card {
+  border-radius: 10px;
+}
+
+.elevated-search input:focus {
+  outline: none;
+}

@@ -1,0 +1,144 @@
+/*
+ * @NOTE: Prepend a `~` to css file paths that are in your node_modules
+ *        See https://github.com/webpack-contrib/sass-loader#imports
+ */
+@import './css/variables.scss';
+@import '~@material/textfield/dist/mdc.textfield.min.css';
+@import '~@material/floating-label/dist/mdc.floating-label.css';
+@import '~@material/notched-outline/dist/mdc.notched-outline.css';
+@import '~@material/line-ripple/dist/mdc.line-ripple.css';
+@import '~@material/select/dist/mdc.select.min.css';
+@import '~@material/button/dist/mdc.button.min.css';
+@import '~@material/icon-button/dist/mdc.icon-button.min.css';
+@import '~@material/tab-bar/dist/mdc.tab-bar.min.css';
+@import '~@material/tab/dist/mdc.tab.min.css';
+@import '~@material/tab-indicator/dist/mdc.tab-indicator.min.css';
+@import '~@material/tab-scroller/dist/mdc.tab-scroller.min.css';
+@import '~@material/list/dist/mdc.list.min.css';
+@import '~@material/typography/dist/mdc.typography.min.css';
+@import '~@material/layout-grid/dist/mdc.layout-grid.min.css';
+@import '~@rmwc/circular-progress/circular-progress.css';
+@import '~@rmwc/icon/icon.css';
+@import '~@material/menu/dist/mdc.menu.css';
+@import '~@material/menu-surface/dist/mdc.menu-surface.css';
+@import '~@rmwc/avatar/avatar.css';
+@import '~@material/dialog/dist/mdc.dialog.css';
+@import '~@rmwc/data-table/data-table.css';
+@import '~@rmwc/tooltip/tooltip.css';
+@import '~@material/elevation/dist/mdc.elevation.css';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'PT Sans', 'Segoe UI',
+    'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.mdc-elevation--z4 {
+  background-color: white;
+}
+.mdc-card {
+  background-color: white;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.rmwc-avatar {
+  border-radius: 10px;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+[role='link']:focus {
+  outline: none;
+}
+
+@import './css/common.scss';
+@import './css/chat.scss';
+@import './css/channels.scss';
+@import './css/connect.scss';
+@import './css/conversationdetail.scss';
+@import './css/fund.scss';
+@import './css/modal.scss';
+@import './css/nodes.scss';
+@import './css/payments.scss';
+
+.global-form-error {
+  margin: 10px;
+  color: red;
+  text-align: center;
+}
+
+.open-channel-wrapper h2 {
+  text-align: center;
+}
+
+.open-channel-wrapper p {
+  padding: 25px;
+}
+
+.page-header {
+  margin: 20px;
+}
+
+.container {
+  position: absolute;
+  top: 30%;
+  left: 10px;
+  text-align: center;
+}
+
+.container h2 {
+  font-size: 5rem;
+}
+
+.container a {
+  font-size: 1.4rem;
+}
+
+.wallet {
+  cursor: pointer;
+}
+
+.backButton {
+  position: absolute;
+  margin-left: 10px;
+}
+
+.backButton i {
+  font-size: 2em;
+}
+
+.formHeader {
+  margin: 0;
+  margin-top: 15px;
+  text-align: center;
+}
+
+.header-with-list {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.page-header h1 {
+  text-align: center;
+  margin-bottom: 10px;
+}

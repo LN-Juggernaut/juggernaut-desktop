@@ -1,0 +1,19 @@
+.fund-wrapper {
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 25px;
+  padding: 25px;
+  width: 450px;
+}
+
+.fund-wrapper .qr-address {
+  margin: 25px;
+}
+
+.fund-wrapper .address {
+  font-size: 16px;
+  background-color: $fund-address-bg-color;
+  color: $fund-address-fg-color;
+  display: inline-block;
+  padding: 15px;
+}

@@ -1,0 +1,33 @@
+.modal-wrapper {
+  z-index: 6;
+  background-color: $modal-wrapper-bg-color;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.modal {
+  z-index: 7;
+  background-color: $modal-bg-color;
+}
+
+.modalHeader {
+  position: absolute;
+  top: 23px;
+  right: 33px;
+  z-index: 9000;
+  color: $modal-close-icon-color;
+  background-color: $modal-close-icon-bg-color;
+  border-radius: 10px;
+}
+
+.modalHeader i {
+  cursor: pointer;
+}
+
+.modalBody {
+  margin: 0;
+  height: 100vh;
+}

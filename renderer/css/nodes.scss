@@ -1,0 +1,19 @@
+.node-list-header-cell {
+  cursor: pointer;
+}
+
+.filtered-node-list {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border-radius: 10px;
+}
+
+.filtered-node-list table {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.node-list {
+  overflow: auto;
+}

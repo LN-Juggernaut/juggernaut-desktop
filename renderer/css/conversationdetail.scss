@@ -1,0 +1,47 @@
+.conversation-detail-header {
+  height: 50px;
+  position: relative;
+}
+
+.conversation-detail-header button {
+  position: absolute;
+  top: 0;
+  left: 20px;
+}
+
+.conversation-detail-header .page-title {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 50px;
+  text-align: center;
+}
+
+.conversation-detail {
+  padding: 35px;
+}
+
+.detail-avatar {
+  color: white;
+  position: relative;
+  top: -29px;
+  margin-left: -29px;
+  left: 50%;
+  border: 5px solid white;
+}
+
+.conversation-detail-info .info {
+  padding: 20px;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.conversation-detail-info .alias {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.conversation-detail-info .pubkey {
+  font-size: 10px;
+  color: $default-text-color;
+  margin-bottom: 10px;
+}

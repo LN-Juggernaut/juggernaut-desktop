@@ -1,0 +1,78 @@
+$primary-color: rgb(140, 77, 249);
+$secondary-color: rgb(165, 115, 250);
+$default-text-color: rgb(128, 128, 128);
+
+:root {
+  --mdc-theme-primary: rgb(140, 77, 249);
+  --mdc-theme--on-primary: red;
+  --mdc-theme-secondary: red;
+  --mdc-theme-background: white;
+  --mdc-theme--primary-bg: white;
+  --mdc-theme--secondary-bg: white;
+}
+
+$page-bg-color: rgba(124, 0, 255, 0.01);
+
+$fixed-header-gradient-from-color-old: rgba(102, 101, 250, 1);
+$fixed-header-gradient-to-color-old: rgba(126, 96, 230, 1);
+
+$fixed-header-gradient-from-color: $primary-color;
+$fixed-header-gradient-to-color: $secondary-color;
+
+$fixed-header-background: linear-gradient(
+  90deg,
+  $fixed-header-gradient-from-color 0%,
+  $fixed-header-gradient-to-color 100%
+);
+
+$elevated-search-icon-color: rgb(170, 170, 170);
+$elevated-search-bg-color: white;
+$elevated-search-text-color: black;
+
+$modal-wrapper-bg-color: rgba(0, 0, 0, 0.6);
+$modal-bg-color: rgb(250, 245, 255);
+$modal-close-icon-bg-color: rgb(200, 200, 200);
+$modal-close-icon-color: white;
+
+$payment-request-pending-bg-color: rgba(250, 215, 16, 0.2);
+$payment-request-paid-bg-color: rgba(0, 255, 0, 0.2);
+$payment-receiver-bg-color: rgba(0, 255, 0, 0.2);
+$payment-sender-bg-color: rgba(255, 0, 0, 0.2);
+$payment-icon-color: white;
+$payment-request-icon-color: white;
+$payment-sender-icon-bg-color: red;
+$payment-receiver-icon-bg-color: green;
+$payment-request-paid-icon-bg-color: green;
+$payment-request-pending-icon-bg-color: orange;
+
+// border between conversation list and conversation
+$chat-section-separator-color: rgb(230, 230, 230);
+$chat-left-width: 300px;
+$chat-attachment-button-color: blue;
+$chat-send-message-button-color: rgb(230, 179, 70);
+$chat-message-text-color: black;
+$chat-message-info-color: rgba(0, 0, 0, 0.38);
+$chat-message-fee-color: red;
+$chat-author-name-color: rgb(62, 128, 201);
+$chat-scroll-to-bottom-border-color: rgb(200, 200, 200);
+$chat-scroll-to-bottom-bg-color: white;
+
+$conversation-search-bg-color: rgb(240, 240, 240);
+$conversation-search-color: #1b1b1b;
+$conversation-search-border-color: #f6f6f6;
+$conversation-search-focused-border-color: $primary-color;
+
+$unread-messages-bg-color: rgb(215, 215, 215);
+$unread-messages-fg-color: white;
+
+$channel-bg-color: white;
+$channel-meter-bg-color: #555;
+$channel-meter-box-shadow-color: rgba(255, 255, 255, 0.3);
+$channel-meter-local-bg-color: rgb(43, 194, 83);
+$channel-meter-remote-bg-color: rgb(196, 75, 45);
+$link-color: blue;
+
+$menu-item-background-color: white;
+
+$fund-address-bg-color: rgb(240, 240, 240);
+$fund-address-fg-color: black;

@@ -1,0 +1,38 @@
+import React, { useState } from 'react';
+import { Card, TabBar, Tab } from 'rmwc';
+import AddWalletForm from './AddWalletForm';
+import { Page, FixedHeader } from '../common';
+
+const AddWallet = () => {
+  const [activeTab, setActiveTab] = useState(0);
+  return (
+    <Page>
+      <FixedHeader
+        title="Add Node"
+        details="Enter your nodes connection details using either LND Connect format or manually specify each field."
+      />
+      <Card style={{ marginTop: '25px' }}>
+        <TabBar
+          activeTabIndex={activeTab}
+          onActivate={evt => setActiveTab(evt.detail.index)}
+        >
+          <Tab>LND Connect</Tab>
+          <Tab>Manual</Tab>
+        </TabBar>
+      </Card>
+      <Card
+        style={{
+          marginTop: '10px',
+          borderBottomLeftRadius: '10px',
+          borderBottomRightRadius: '10px',
+          overflow: 'auto',
+          marginBottom: '15px',
+          padding: '5px'
+        }}
+      >
+        <AddWalletForm activeTab={activeTab} />
+      </Card>
+    </Page>
+  );
+};
+export default AddWallet;

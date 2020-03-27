@@ -1,0 +1,347 @@
+{
+  "name": "juggernaut-desktop",
+  "productName": "Juggernaut",
+  "version": "0.1.0",
+  "description": "Decentralized messaging and payments",
+  "scripts": {
+    "build": "cross-env NODE_CONFIG_ENV=production webpack -r @babel/register --config webpack/webpack.config.prod.js",
+    "build-e2e": "cross-env NODE_CONFIG_ENV=e2e webpack -r @babel/register --config webpack/webpack.config.e2e.js",
+    "build-dll": "webpack -r @babel/register --config webpack/webpack.config.dll.js",
+    "build-main": "webpack -r @babel/register --config webpack/webpack.config.main.js",
+    "clean": "rimraf node_modules dll dist coverage .eslintcache",
+    "coverage": "open coverage/index.html",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "predev": "yarn build-main",
+    "dev": "cross-env HOT=1 yarn start-renderer-dev",
+    "extract-messages": "extract-messages -l=af-ZA,ca-ES,de-DE,es-ES,ga-IE,hr-HR,ja-JP,no-NO,pt-PT,sr-SP,uk-UA,zh-TW,ar-SA,cs-CZ,el-GR,fi-FI,he-IL,hu-HU,ko-KR,pl-PL,ro-RO,sv-SE,vi-VN,bg-BG,da-DK,en,fr-FR,hi-IN,it-IT,nl-NL,pt-BR,ru-RU,tr-TR,zh-CN -o translations -d en --flat true app/**/messages.js",
+    "fetch-lnd": "node -r @babel/register ./scripts/fetch-lnd-for-packaging.js",
+    "generate-icon": "node -r @babel/register ./scripts/genIcons.js",
+    "lint-base": "eslint --cache --format=node_modules/eslint-formatter-pretty",
+    "lint": "yarn lint-base .",
+    "lint-fix-base": "yarn lint-base --fix",
+    "lint-fix": "yarn lint-fix-base \"./**/*.{js,json,md}\"",
+    "lint-styles-base": "stylelint --custom-formatter=node_modules/stylelint-formatter-pretty --allow-empty-input",
+    "lint-styles": "yarn lint-styles-base \"renderer/features/**/*.js\"",
+    "lint-styles-fix-base": "yarn lint-styles-base --fix",
+    "lint-styles-fix": "yarn lint-styles-fix-base \"renderer/features/**/*.js\"",
+    "lint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
+    "lint-ci": "yarn lint && yarn lint-styles",
+    "package": "yarn build && electron-builder",
+    "release": "yarn package --publish onTagOrDraft",
+    "postinstall": "yarn build-dll && electron-builder install-app-deps",
+    "prestart": "cross-env NODE_CONFIG_ENV=production yarn build",
+    "start": "cross-env NODE_ENV=production electron .",
+    "start-main-dev": "electron -r @babel/register ./electron/main.js",
+    "start-renderer-dev": "webpack-dev-server -r @babel/register --config webpack/webpack.config.renderer.js  --progress",
+    "storybook": "cross-env NODE_ENV=storybook start-storybook -p 6006",
+    "storybook:build": "cross-env NODE_ENV=storybook build-storybook",
+    "storybook:deploy": "yarn storybook:build && gh-pages -t -d storybook-static -o origin -b gh-pages",
+    "test": "yarn lint && yarn lint-styles && yarn build && yarn test-unit && yarn test-e2e",
+    "test-unit": "jest --coverage ./test/unit",
+    "test-ci": "yarn test-e2e && yarn test-unit",
+    "pretest-e2e": "yarn build-e2e",
+    "test-e2e": "cross-env DISABLE_INIT=1 ELECTRON_USER_DIR_TEMP=1 testcafe --selector-timeout 60000 --assertion-timeout 60000 --screenshots ./screenshots --screenshots-on-fails electron:./ ./test/e2e"
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "cross-env NODE_ENV=development eslint --cache --format=pretty",
+      "git add"
+    ],
+    "{*.json,.{babelrc,eslintrc,prettierrc,stylelintrc}}": [
+      "prettier --ignore-path .eslintignore --parser json --write",
+      "git add"
+    ],
+    "*.{css,scss}": [
+      "stylelint --ignore-path .eslintignore --syntax scss --fix",
+      "prettier --ignore-path .eslintignore --single-quote --write",
+      "git add"
+    ],
+    "*.{html,md,yml}": [
+      "prettier --ignore-path .eslintignore --single-quote --write",
+      "git add"
+    ]
+  },
+  "build": {
+    "productName": "Juggernaut",
+    "appId": "io.juggernautlabs",
+    "generateUpdatesFilesForAllChannels": true,
+    "publish": [
+      "github"
+    ],
+    "files": [
+      "dist/",
+      "!node_modules/"
+    ],
+    "directories": {
+      "buildResources": "resources",
+      "output": "release"
+    },
+    "extraResources": [
+      {
+        "from": "node_modules/@ln-juggernaut/lnd-grpc/proto",
+        "to": "resources/proto"
+      }
+    ],
+    "artifactName": "${productName}-${os}-${arch}-v${version}.${ext}",
+    "asarUnpack": [
+      "**/*.node"
+    ],
+    "mac": {
+      "category": "public.app-category.finance",
+      "icon": "resources/icon.icns",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "./resources/mac/entitlements.mac.inherit.plist",
+      "entitlementsInherit": "./resources/mac/entitlements.mac.inherit.plist",
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "category": "Development",
+      "desktop": {
+        "Comment": "Juggernaut - Lightning messenger and wallet",
+        "Icon": "juggernaut",
+        "Name": "Juggernaut",
+        "StartupNotify": "true",
+        "Terminal": "false",
+        "Type": "Application",
+        "Categories": "P2P;Finance;Security"
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LN-Juggernaut/juggernaut-desktop.git"
+  },
+  "author": {
+    "name": "John Cantrell",
+    "email": "johncantrell97@protonmail.com",
+    "url": "https://github.com/LN-Juggernaut/juggernaut-desktop"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LN-Juggernaut/juggernaut-desktop/issues"
+  },
+  "contributors": [
+    {
+      "name": "John Cantrell",
+      "email": "johncantrell97@protonmail.com",
+      "url": "https://github.com/johncantrell97"
+    }
+  ],
+  "keywords": [
+    "juggernaut",
+    "bitcoin",
+    "lightning",
+    "lapp",
+    "chat",
+    "messenger",
+    "payments",
+    "decentralized"
+  ],
+  "homepage": "https://github.com/LN-Juggernaut/juggernaut-desktop#readme",
+  "jest": {
+    "testURL": "http://localhost/",
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/internals/mocks/fileMock.js",
+      "\\.(css|less|sass|scss)$": "identity-obj-proxy"
+    },
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "json"
+    ],
+    "moduleDirectories": [
+      "node_modules"
+    ],
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    },
+    "setupFiles": [
+      "./internals/scripts/CheckBuildsExist.js"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.5",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "@babel/plugin-proposal-decorators": "^7.7.4",
+    "@babel/plugin-proposal-do-expressions": "^7.7.4",
+    "@babel/plugin-proposal-export-default-from": "^7.7.4",
+    "@babel/plugin-proposal-export-namespace-from": "^7.7.4",
+    "@babel/plugin-proposal-function-bind": "^7.7.4",
+    "@babel/plugin-proposal-function-sent": "^7.7.4",
+    "@babel/plugin-proposal-json-strings": "^7.7.4",
+    "@babel/plugin-proposal-logical-assignment-operators": "^7.7.4",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.7.4",
+    "@babel/plugin-proposal-numeric-separator": "^7.7.4",
+    "@babel/plugin-proposal-optional-chaining": "^7.7.5",
+    "@babel/plugin-proposal-pipeline-operator": "^7.7.4",
+    "@babel/plugin-proposal-throw-expressions": "^7.7.4",
+    "@babel/plugin-syntax-dynamic-import": "^7.7.4",
+    "@babel/plugin-syntax-import-meta": "^7.7.4",
+    "@babel/plugin-transform-react-constant-elements": "^7.7.4",
+    "@babel/plugin-transform-react-inline-elements": "^7.7.4",
+    "@babel/preset-env": "^7.7.6",
+    "@babel/preset-react": "^7.7.4",
+    "@babel/register": "^7.7.4",
+    "add-asset-html-webpack-plugin": "^3.1.3",
+    "babel-core": "7.0.0-bridge.0",
+    "babel-eslint": "^10.0.3",
+    "babel-jest": "^24.9.0",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-dev-expression": "^0.2.2",
+    "babel-plugin-module-resolver": "3.2.0",
+    "babel-plugin-transform-react-pure-class-to-function": "^1.0.1",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "chalk": "^3.0.0",
+    "circular-dependency-plugin": "^5.2.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "concurrently": "^5.0.1",
+    "copy-webpack-plugin": "5.0.4",
+    "cross-env": "^6.0.3",
+    "cross-spawn": "^7.0.1",
+    "csp-html-webpack-plugin": "^3.0.4",
+    "css-loader": "^3.3.2",
+    "detect-port": "^1.3.0",
+    "electron": "8.2.0",
+    "electron-builder": "22.4.1",
+    "electron-devtools-installer": "2.2.4",
+    "electron-notarize": "0.2.1",
+    "electron-updater": "4.2.5",
+    "enzyme": "^3.7.0",
+    "enzyme-adapter-react-16": "^1.7.0",
+    "enzyme-to-json": "^3.3.4",
+    "eslint": "^6.7.2",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-erb": "^0.1.1",
+    "eslint-config-prettier": "^6.6.0",
+    "eslint-formatter-pretty": "^3.0.0",
+    "eslint-import-resolver-webpack": "^0.12.0",
+    "eslint-plugin-compat": "^3.3.0",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-jest": "^23.1.1",
+    "eslint-plugin-jsx-a11y": "6.2.3",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-testcafe": "^0.2.1",
+    "fbjs-scripts": "^1.2.0",
+    "file-loader": "^5.0.2",
+    "html-webpack-plugin": "3.2.0",
+    "husky": "^3.1.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^24.9.0",
+    "lint-staged": "^9.5.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "node-sass": "^4.13.0",
+    "opencollective-postinstall": "^2.0.2",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
+    "prettier": "^1.19.1",
+    "react-test-renderer": "^16.12.0",
+    "redux-logger": "^3.0.6",
+    "rimraf": "^3.0.0",
+    "sass-loader": "^8.0.0",
+    "sinon": "^7.5.0",
+    "spectron": "^9.0.0",
+    "style-loader": "^1.0.1",
+    "stylelint": "^12.0.0",
+    "stylelint-config-prettier": "^8.0.0",
+    "stylelint-config-standard": "^19.0.0",
+    "terser-webpack-plugin": "^2.3.0",
+    "testcafe": "^1.6.1",
+    "testcafe-browser-provider-electron": "^0.0.13",
+    "testcafe-react-selectors": "^3.3.0",
+    "url-loader": "2.2.0",
+    "webpack": "4.41.2",
+    "webpack-bundle-analyzer": "3.6.0",
+    "webpack-cli": "3.3.10",
+    "webpack-dev-server": "3.9.0",
+    "webpack-merge": "4.2.2",
+    "yarn": "^1.21.1"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.12.0",
+    "@hot-loader/react-dom": "^16.11.0",
+    "@ln-juggernaut/lnd-grpc": "0.3.5",
+    "@reduxjs/toolkit": "^1.1.0",
+    "bitcoinjs-lib": "^5.1.7",
+    "bolt11": "^1.2.7",
+    "comlinkjs": "^3.2.0",
+    "config": "^3.2.5",
+    "connected-react-router": "^6.6.1",
+    "core-js": "^3.6.1",
+    "debug": "^4.1.1",
+    "debug-logger": "^0.4.1",
+    "devtron": "^1.4.0",
+    "dexie": "^2.0.4",
+    "electron-is-dev": "^1.1.0",
+    "final-form": "^4.18.6",
+    "final-form-arrays": "^3.0.2",
+    "final-form-focus": "^1.1.2",
+    "flexsearch": "^0.6.32",
+    "history": "^4.10.1",
+    "moment": "^2.24.0",
+    "qrcode.react": "^1.0.0",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-final-form": "^6.3.3",
+    "react-hot-loader": "^4.12.18",
+    "react-redux": "^7.1.3",
+    "react-router": "^5.1.2",
+    "react-router-dom": "^5.1.2",
+    "react-scroll-to": "^3.0.0-beta.4",
+    "rmwc": "^5.7.2",
+    "source-map-support": "^0.5.16"
+  },
+  "engines": {
+    "node": ">=12.0.0",
+    "npm": ">=5.x",
+    "yarn": ">=1.0.0"
+  },
+  "collective": {
+    "url": "https://opencollective.com/juggernaut-594"
+  },
+  "browserslist": [
+    "electron 6.0.2"
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "main": "./dist/main.js"
+}

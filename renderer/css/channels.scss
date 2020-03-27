@@ -1,0 +1,120 @@
+.open-channel-btn-wrapper {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding-left: 25px;
+}
+
+.channel-list {
+  margin: 25px;
+  margin-top: 0;
+}
+
+.channel-list-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
+  align-items: center;
+}
+
+.channel {
+  background-color: $channel-bg-color;
+  padding: 0;
+  border-radius: 10px;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+}
+
+.channel-graphic {
+  padding: 20px;
+  padding-right: 10px;
+  flex-grow: 1;
+}
+
+.channel-actions {
+  padding: 10px;
+  padding-left: 0;
+}
+
+.channel-headers,
+.channel-values {
+  display: flex;
+  justify-content: space-between;
+}
+
+.channel-headers div,
+.channel-values div {
+  width: 20%;
+}
+
+.capacity-value,
+.capacity-header {
+  text-align: center;
+}
+
+.channel-headers div:last-child,
+.channel-values div:last-child {
+  text-align: right;
+}
+
+.channel-status {
+  width: 4%;
+  text-align: center;
+}
+
+.channel-status i {
+  vertical-align: top;
+}
+
+.channel-bars {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.meter {
+  width: 48%;
+  height: 5px;
+  position: relative;
+  background: $channel-meter-bg-color;
+  border-radius: 0;
+  border-top-right-radius: 25px;
+  border-bottom-right-radius: 25px;
+  box-shadow: inset 0 -1px 1px $channel-meter-box-shadow-color;
+}
+
+.meter.remote {
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+}
+
+.meter > span {
+  display: block;
+  height: 5px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  background-color: $channel-meter-local-bg-color;
+  position: relative;
+  overflow: hidden;
+}
+
+.remote.meter > span {
+  float: right;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  background-color: $channel-meter-remote-bg-color;
+}
+
+.open-channel-card.mdc-card {
+  margin-top: 20px;
+  padding: 5px;
+  border-radius: 0;
+}
