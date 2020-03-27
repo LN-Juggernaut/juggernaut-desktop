@@ -7,11 +7,12 @@ const PaymentRequestSender = props => {
   const [amountMSats, memo] = content.split(',');
   const amountSats = parseInt(amountMSats, 10) / 1000;
   const statusClass = response ? 'paid' : 'pending';
-  const icon = response ? 'check' : 'sync';
+  const icon = response ? 'check' : 'autorenew';
+  const iconClass = response ? '' : 'spin';
   return (
     <div className={`message-payment-request sender ${statusClass}`}>
       <div className="icon-wrapper">
-        <Icon icon={icon} />
+        <Icon className={iconClass} icon={icon} />
       </div>
       <div className="content-wrapper">
         Requested {amountSats} sats
