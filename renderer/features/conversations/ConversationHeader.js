@@ -11,7 +11,6 @@ import {
 } from 'rmwc';
 import {
   removeConversation,
-  showConversationDetails,
   updateConversationFeeLimitMSats
 } from './conversationsSlice';
 import { updateConversationFeeLimit } from '../../../utils/db';
@@ -52,14 +51,6 @@ const ConversationHeader = props => {
             onClose={() => setOpen(false)}
             style={{ width: '250px' }}
           >
-            <MenuItem
-              onClick={() => {
-                dispatch(showConversationDetails());
-              }}
-            >
-              <ListItemGraphic icon="sync_alt" />
-              Manage Channels
-            </MenuItem>
             <MenuItem
               onClick={async () => {
                 let newLimit;
