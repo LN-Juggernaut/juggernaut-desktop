@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { List } from 'rmwc';
 import { conversationType } from '../../types';
 import ConversationListItem from './ConversationListItem';
 import EmptyConversationList from './EmptyConversationList';
@@ -22,7 +21,7 @@ const ConversationList = props => {
   }
 
   return (
-    <List className="conversationList" twoLine>
+    <div className="conversation-list">
       {conversations.map(conversation => (
         <ConversationListItem
           key={conversation.id}
@@ -32,7 +31,7 @@ const ConversationList = props => {
           conversation={conversation}
         />
       ))}
-    </List>
+    </div>
   );
 };
 

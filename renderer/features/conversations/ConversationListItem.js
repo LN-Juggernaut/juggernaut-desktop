@@ -1,15 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
-import {
-  ListItem,
-  ListItemGraphic,
-  ListItemText,
-  ListItemPrimaryText,
-  ListItemSecondaryText,
-  ListItemMeta,
-  Avatar
-} from 'rmwc';
+import { Avatar } from 'rmwc';
 import { conversationType } from '../../types';
 
 class ConversationListItem extends Component {
@@ -22,8 +14,13 @@ class ConversationListItem extends Component {
       mostRecentMessageContent,
       unreadMessages
     } = conversation;
+
     let createdAtTime;
     const displayLastMessage = mostRecentMessageContent || '';
+    let className = 'conversation-list-item';
+    if (selected) {
+      className += ' selected';
+    }
 
     if (mostRecentMessageAt) {
       createdAtTime = moment(mostRecentMessageAt);
@@ -39,40 +36,37 @@ class ConversationListItem extends Component {
     }
 
     return (
-      <ListItem
-        ripple={false}
+      <div
+        onKeyPress={() => {}}
         onClick={() => select({ id })}
-        selected={selected}
-        className="conversationListItem"
+        className={className}
       >
-        <ListItemGraphic
-          icon={
-            <Avatar
-              style={{
-                width: '48px',
-                height: '48px',
-                marginRight: '10px',
-                backgroundColor: `${color}`,
-                color: 'white'
-              }}
-              size="xlarge"
-              name={displayName.toUpperCase()}
-            />
-          }
-        />
-        <ListItemText>
-          <ListItemPrimaryText>{displayName}</ListItemPrimaryText>
-          <ListItemSecondaryText>{displayLastMessage}</ListItemSecondaryText>
-        </ListItemText>
-        <ListItemMeta>
-          {createdAtTime}
+        <div className="list-item-graphic">
+          <Avatar
+            style={{
+              width: '48px',
+              height: '48px',
+              marginRight: '10px',
+              backgroundColor: `${color}`,
+              color: 'white'
+            }}
+            size="xlarge"
+            name={displayName.toUpperCase()}
+          />
+        </div>
+        <div className="list-item-text">
+          <div className="alias">{displayName}</div>
+          <div className="last-message">{displayLastMessage}</div>
+        </div>
+        <div className="timestamp">{createdAtTime}</div>
+        <div className="unread-messages-wrapper">
           {unreadMessages > 0 && (
-            <div className="unreadMessages">
+            <div className="unread-messages">
               <span>{unreadMessages}</span>
             </div>
           )}
-        </ListItemMeta>
-      </ListItem>
+        </div>
+      </div>
     );
   }
 }

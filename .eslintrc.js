@@ -41,6 +41,7 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'no-await-in-loop': 'off',
     'no-restricted-globals': 'off',
+    'jsx-a11y/no-static-element-interactions': 'off',
     'react/sort-comp': [
       'error',
       {
