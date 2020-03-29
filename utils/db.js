@@ -157,11 +157,6 @@ export const createMessageResponse = async (messageParams, walletId) => {
   const requestMessage = await db.messages
     .where({ conversationId })
     .and(message => {
-      console.log(
-        `${requestIdentifier} === ${message.preimage.substr(0, 8)}  ${
-          message.contentType
-        }   ${message.response}`
-      );
       return (
         message.preimage.substr(0, 8) === requestIdentifier &&
         message.contentType === 'paymentrequest' &&

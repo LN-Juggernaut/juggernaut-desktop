@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import Loader from '../common/Loader';
 import NodeList from './NodeList';
 import NodeListFilter from './NodeListFilter';
@@ -26,7 +27,13 @@ const FilteredNodeList = props => {
   };
 
   useEffect(() => {
-    fetchNodes();
+    if (
+      moment()
+        .subtract(5, 'minutes')
+        .isAfter(moment(lastFetch))
+    ) {
+      fetchNodes();
+    }
   }, []);
 
   useEffect(() => {

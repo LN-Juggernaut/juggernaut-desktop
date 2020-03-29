@@ -17,6 +17,7 @@ const nodesSlice = createSlice({
       state.lastFetch = null;
       state.nodeListPageModalVisible = false;
       state.error = null;
+      graphIndex.clear();
     }
   },
   reducers: {

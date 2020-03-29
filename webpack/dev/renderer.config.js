@@ -11,8 +11,6 @@ import plugins from './common/plugins';
 const dll = path.resolve(rootDir, 'dll');
 const manifest = path.resolve(dll, 'renderer.json');
 
-console.log(path.join('renderer', 'app.html'));
-
 const config = merge.smart(baseConfig, {
   name: 'renderer',
   target: 'web',

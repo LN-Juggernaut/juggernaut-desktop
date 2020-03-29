@@ -6,9 +6,10 @@ import getNodeInterface from '../../../utils/getNodeInterface';
 import { receiveMessage } from '../messages/messagesSlice';
 import {
   receiveChannelGraphData,
-  fetchChannels,
+  fetchChannelsSuccess,
   receiveChannelEvent
 } from '../channels/channelsSlice';
+import { fetchNodesSuccess } from '../nodes/nodesSlice';
 import { receivePeerEvent } from '../peers/peersSlice';
 import { receiveTransaction } from '../transactions/transactionsSlice';
 import { logout, newMessage } from '../common/actions';
@@ -18,6 +19,7 @@ const walletSlice = createSlice({
   initialState: {
     walletId: null,
     loading: false,
+    loadingMessage: null,
     locked: false,
     info: null,
     fundingAddress: null,
@@ -114,6 +116,10 @@ const walletSlice = createSlice({
     updateAvailableBalance(state, action) {
       const { balanceAdjustment } = action.payload;
       state.availableBalance += balanceAdjustment;
+    },
+    updateLoadingMessage(state, action) {
+      const { message } = action.payload;
+      state.loadingMessage = message;
     }
   },
   extraReducers: {
@@ -152,7 +158,8 @@ const {
   connectWalletStart,
   connectWalletFailure,
   walletLocked,
-  walletActive
+  walletActive,
+  updateLoadingMessage
 } = walletSlice.actions;
 
 export const fetchChatNodes = () => {
@@ -171,10 +178,20 @@ export const fetchChatNodes = () => {
 export const fetchWallet = walletId => {
   return async dispatch => {
     dispatch(fetchWalletStart());
-    dispatch(fetchChannels());
     try {
+      const lnNode = getNodeInterface();
       const wallet = await readWallet(walletId);
+      dispatch(
+        updateLoadingMessage({
+          message: 'processing invoices and network graph...'
+        })
+      );
       const walletDetails = await getWalletDetails(wallet);
+      const { active, pending, closing } = await lnNode.listChannels();
+
+      const nodes = await lnNode.getAllNodes();
+      dispatch(fetchNodesSuccess({ nodes }));
+      dispatch(fetchChannelsSuccess({ active, pending, closing }));
       dispatch(fetchWalletSuccess(walletDetails));
     } catch (e) {
       dispatch(fetchWalletFailure(e.message));

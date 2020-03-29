@@ -46,7 +46,7 @@ const findByPubKey = pubKey => {
 };
 
 const search = options => {
-  const { query = '', page = 0, pageSize = 50, sort = defaultSort } = options;
+  const { query = '', page = 0, pageSize = 25, sort = defaultSort } = options;
   return nodes.pubKeys
     .filter(pubKey => {
       const node = nodes.byPubKey[pubKey];
@@ -59,9 +59,15 @@ const search = options => {
     .slice(page * pageSize, (page + 1) * pageSize);
 };
 
+const clear = () => {
+  nodes.byPubKey = {};
+  nodes.pubKeys = [];
+};
+
 export default {
   addNode,
   addNodes,
   search,
-  findByPubKey
+  findByPubKey,
+  clear
 };

@@ -50,9 +50,7 @@ export const getWalletDetails = async wallet => {
   // TODO: we will always do this until we receive our first message
   //       really we should only do this on first load of a wallet
   if (!lastSettleIndex) {
-    console.log('about to get all sent messages');
     const sentMessages = await lnNode.getAllSentMessages();
-    console.log('got all sent messages', sentMessages);
     const mostRecentSentMessage = sentMessages[sentMessages.length - 1];
     if (mostRecentSentMessage) {
       messages.forEach(message => {
