@@ -92,7 +92,7 @@ button.sendButton {
   left: 8px;
   top: 7px;
   font-size: 22px;
-  color: rgb(128, 128, 128);
+  color: $default-icon-color;
 }
 .search input {
   height: 35px;
@@ -128,21 +128,18 @@ button.sendButton {
     overflow: hidden;
   }
 
-  .list-item-graphic {
-  }
-
   .list-item-text {
     flex-grow: 1;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     .alias {
-      color: rgb(100, 100, 100);
+      color: darken($default-text-color, 10%);
       font-weight: 600;
     }
 
     .last-message {
-      color: rgb(128, 128, 128);
+      color: lighten($default-text-color, 10%);
       text-overflow: ellipsis;
       white-space: nowrap;
       overflow: hidden;
@@ -159,7 +156,7 @@ button.sendButton {
     top: 10px;
     right: 10px;
     font-size: 12px;
-    color: rgb(128, 128, 128);
+    color: $default-text-color;
   }
 
   .unread-messages-wrapper {

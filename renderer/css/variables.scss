@@ -1,9 +1,10 @@
-$primary-color: rgb(140, 77, 249);
-$secondary-color: rgb(165, 115, 250);
+$primary-color: #89389e;
+$secondary-color: #ce1792;
 $default-text-color: rgb(128, 128, 128);
+$default-icon-color: rgb(128, 128, 128);
 
 :root {
-  --mdc-theme-primary: rgb(140, 77, 249);
+  --mdc-theme-primary: #89389e;
   --mdc-theme--on-primary: red;
   --mdc-theme-secondary: red;
   --mdc-theme-background: white;
