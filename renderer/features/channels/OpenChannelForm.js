@@ -8,7 +8,7 @@ import getNodeInterface from '../../../utils/getNodeInterface';
 import errors from '../../constants/errors.json';
 import { nodeType, nodeDetailsType } from '../../types';
 import { Page, FixedHeader, ScrollableContent } from '../common';
-
+import { OpenChannelIcon } from '../images';
 import sharedStyles from '../../../utils/styles';
 
 const initialValues = {
@@ -78,6 +78,7 @@ const OpenChannelForm = props => {
       <FixedHeader
         title="Open Channel"
         details="A channel lets you open a direct connection to a node for a one time fee. Once the channel is open you will be able to send unlimited messages to that node without any additional routing fees."
+        ImageComponent={OpenChannelIcon}
       />
       <ScrollableContent>
         <Card className="open-channel-card">

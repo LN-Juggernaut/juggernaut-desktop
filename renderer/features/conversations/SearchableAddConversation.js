@@ -11,6 +11,7 @@ import {
   selectConversation
 } from './conversationsSlice';
 import { createConversation } from '../../../utils/db';
+import { NewConversationIcon } from '../images';
 
 const SearchableAddConversation = ({ walletId }) => {
   const [activeTab, setActiveTab] = useState(0);
@@ -33,6 +34,7 @@ const SearchableAddConversation = ({ walletId }) => {
       <FixedHeader
         title="Start New Conversation"
         details="Search for someone to chat with using their alias or public key. Starting a conversation does not require opening a new channel but inorder to send a message to a node a valid route will need to exist."
+        ImageComponent={NewConversationIcon}
       />
       <Card style={{ marginTop: '25px' }}>
         <TabBar

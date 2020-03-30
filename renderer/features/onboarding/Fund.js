@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import QRCode from 'qrcode.react';
 import { Card } from 'rmwc';
 import { Page, FixedHeader } from '../common';
+import { FundIcon } from '../images';
 
 const Fund = props => {
   const { fundingAddress } = props;
@@ -11,8 +12,7 @@ const Fund = props => {
       <FixedHeader
         title="Fund Your Wallet"
         details="You need to add funds to your wallet before you will be able to connect to the lightning network. Please send some satoshis to your wallet address below to get started."
-        imageAlt="bitcoin illustration"
-        imageSrc="../resources/images/bitcoin.svg"
+        ImageComponent={FundIcon}
       />
       <Card className="fund-wrapper">
         <div>

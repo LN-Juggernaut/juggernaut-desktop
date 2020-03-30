@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Card, TabBar, Tab } from 'rmwc';
 import AddWalletForm from './AddWalletForm';
 import { Page, FixedHeader } from '../common';
+import { AddWalletIcon } from '../images';
 
 const AddWallet = () => {
   const [activeTab, setActiveTab] = useState(0);
@@ -10,6 +11,7 @@ const AddWallet = () => {
       <FixedHeader
         title="Add Node"
         details="Enter your nodes connection details using either LND Connect format or manually specify each field."
+        ImageComponent={AddWalletIcon}
       />
       <Card style={{ marginTop: '25px' }}>
         <TabBar

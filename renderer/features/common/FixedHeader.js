@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Typography, IconButton } from 'rmwc';
 import { Link } from 'react-router-dom';
-import BitcoinHeader from '../images/BitcoinHeader';
+import BitcoinIcon from '../images/BitcoinIcon';
 
 const FixedHeader = props => {
   const {
@@ -73,7 +73,7 @@ FixedHeader.defaultProps = {
   backDestination: null,
   title: null,
   backCallback: null,
-  ImageComponent: BitcoinHeader,
+  ImageComponent: BitcoinIcon,
   imageWidth: '120px',
   imageHeight: '120px'
 };

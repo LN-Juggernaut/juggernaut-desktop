@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Card } from 'rmwc';
 import { Page, FixedHeader } from '../common';
 import WalletList from './WalletList';
+import { WalletListIcon } from '../images';
 
 class WalletListPage extends Component {
   render() {
@@ -10,6 +11,7 @@ class WalletListPage extends Component {
         <FixedHeader
           title="Your Nodes"
           details="A node is how you connect and communicate with the lightning network.  Choose which node you would like to use for this session."
+          ImageComponent={WalletListIcon}
         />
         <Card
           style={{
