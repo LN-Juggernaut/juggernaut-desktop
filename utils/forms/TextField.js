@@ -38,7 +38,7 @@ const TextField = props => {
         trailingIcon={trailingIcon}
         tabIndex="0"
       />
-      {error && touched && <div style={styles.error}>{error}</div>}
+      {error && touched && <div className="input-error">{error}</div>}
     </>
   );
 };

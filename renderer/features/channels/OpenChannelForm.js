@@ -77,7 +77,7 @@ const OpenChannelForm = props => {
     <Page>
       <FixedHeader
         title="Open Channel"
-        details="A channel lets you open a direct connection to a node for a one time fee. Once the channel is open you will be able to send unlimited messages to that node without any additional routing fees."
+        details="You need to fund a channel with satoshis from your wallet.  Choose how many satoshis you'd like to place into each side of the channel."
         ImageComponent={OpenChannelIcon}
       />
       <ScrollableContent>

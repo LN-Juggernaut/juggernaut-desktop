@@ -33,7 +33,7 @@ const SearchableAddConversation = ({ walletId }) => {
     <Page>
       <FixedHeader
         title="Start New Conversation"
-        details="Search for someone to chat with using their alias or public key. Starting a conversation does not require opening a new channel but inorder to send a message to a node a valid route will need to exist."
+        details="Search for someone to chat with using their alias or public key."
         ImageComponent={NewConversationIcon}
       />
       <Card style={{ marginTop: '25px' }}>

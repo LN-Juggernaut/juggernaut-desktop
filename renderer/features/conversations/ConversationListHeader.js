@@ -17,8 +17,13 @@ import routes from '../../constants/routes.json';
 import { disconnectWallet } from '../wallets/WalletAPI';
 import { logout } from '../common/actions';
 import { showManageChannelsModal } from '../channels/channelsSlice';
+import { showNodeListPageModal } from '../nodes/nodesSlice';
 import BitcoinLogo from '../images/BitcoinLogo';
 import JuggernautIcon from '../images/JuggernautIcon';
+import ChannelsIcon from '../images/ChannelsIcon';
+import NewConversationIcon from '../images/icons/NewConversationIcon';
+import NewChannelIcon from '../images/icons/NewChannelIcon';
+import LogoutIcon from '../images/icons/LogoutIcon';
 
 const ConversationListHeader = props => {
   const {
@@ -70,15 +75,23 @@ const ConversationListHeader = props => {
               showNewConversationForm();
             }}
           >
-            <ListItemGraphic icon="person_add" />
+            <ListItemGraphic icon={<NewConversationIcon />} />
             <ListItemText>New Conversation</ListItemText>
+          </MenuItem>
+          <MenuItem
+            onClick={() => {
+              dispatch(showNodeListPageModal());
+            }}
+          >
+            <ListItemGraphic icon={<NewChannelIcon />} />
+            <ListItemText>New Channel</ListItemText>
           </MenuItem>
           <MenuItem
             onClick={() => {
               dispatch(showManageChannelsModal());
             }}
           >
-            <ListItemGraphic icon="sync_alt" />
+            <ListItemGraphic icon={<ChannelsIcon />} />
             <ListItemText>Manage Channels</ListItemText>
           </MenuItem>
           <MenuItem
@@ -88,7 +101,7 @@ const ConversationListHeader = props => {
               history.push(routes.WALLETS);
             }}
           >
-            <ListItemGraphic icon="exit_to_app" />
+            <ListItemGraphic icon={<LogoutIcon />} />
             <ListItemText>Logout</ListItemText>
           </MenuItem>
         </Menu>

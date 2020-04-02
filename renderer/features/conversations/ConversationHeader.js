@@ -15,6 +15,8 @@ import {
 } from './conversationsSlice';
 import { updateConversationFeeLimit } from '../../../utils/db';
 import { queue } from '../../dialogQueue';
+import FeeLimitIcon from '../images/icons/FeeLimitIcon';
+import DeleteConversationIcon from '../images/icons/DeleteConversationIcon';
 
 const validFeeLimit = feeLimitMSats => {
   const intVal = parseInt(feeLimitMSats, 10);
@@ -93,7 +95,7 @@ const ConversationHeader = props => {
                 }
               }}
             >
-              <ListItemGraphic icon="tune" />
+              <ListItemGraphic icon={<FeeLimitIcon />} />
               Adjust Fee Limit
             </MenuItem>
             <MenuItem
@@ -101,7 +103,7 @@ const ConversationHeader = props => {
                 dispatch(removeConversation(id));
               }}
             >
-              <ListItemGraphic icon="delete" />
+              <ListItemGraphic icon={<DeleteConversationIcon />} />
               Delete Conversation
             </MenuItem>
           </Menu>

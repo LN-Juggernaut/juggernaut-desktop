@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Typography, IconButton } from 'rmwc';
+import { Theme, Typography, IconButton } from 'rmwc';
 import { Link } from 'react-router-dom';
 import BitcoinIcon from '../images/BitcoinIcon';
+import Blob from '../images/Blob';
 
 const FixedHeader = props => {
   const {
@@ -36,24 +37,41 @@ const FixedHeader = props => {
         </div>
       )}
 
-      <div className="fixed-header-content">
-        <div className="fixed-header-content-text">
-          <Typography className="title" use="headline5" tag="h5">
-            {title}
-          </Typography>
+      <Theme use={['primaryBg', 'onSecondary']} wrap>
+        <div className="fixed-header-content">
+          <div className="fixed-header-content-text">
+            <Typography className="title" use="headline5" tag="h5">
+              {title}
+            </Typography>
 
-          <p className="details">{details}</p>
+            <Typography className="details" use="body1">
+              {details}
+            </Typography>
+          </div>
+          <Blob
+            style={{
+              width: '165px',
+              height: '156px',
+              transform: 'scale(1.75)',
+              position: 'absolute',
+              bottom: '-15px',
+              right: '25px',
+              fill: 'rgb(156,122,241)'
+            }}
+            alt="123"
+            src="../resources/images/blob-4.png"
+          />
+          <div className="fixed-header-content-image">
+            {ImageComponent && (
+              <ImageComponent
+                className="fixed-header-image-component"
+                width={imageWidth}
+                height={imageHeight}
+              />
+            )}
+          </div>
         </div>
-        <div className="fixed-header-content-image">
-          {ImageComponent && (
-            <ImageComponent
-              className="fixed-header-image-component"
-              width={imageWidth}
-              height={imageHeight}
-            />
-          )}
-        </div>
-      </div>
+      </Theme>
     </div>
   );
 };

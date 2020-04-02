@@ -324,7 +324,8 @@
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
     "react-scroll-to": "^3.0.0-beta.4",
-    "rmwc": "^5.7.2",
+    "react-transition-group": "^4.3.0",
+    "rmwc": "^6.0.8",
     "source-map-support": "^0.5.16"
   },
   "engines": {

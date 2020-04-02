@@ -30,11 +30,13 @@ const ChatPage = props => {
 
   return (
     <div>
-      {newConversationModalVisible && (
-        <Modal onClose={hideNewConversationForm}>
-          <SearchableAddConversation walletId={walletId} />
-        </Modal>
-      )}
+      <Modal
+        isOpen={newConversationModalVisible}
+        onClose={hideNewConversationForm}
+      >
+        <SearchableAddConversation walletId={walletId} />
+      </Modal>
+
       <div className="chat">
         <div className="chatLeft">
           <ConversationListHeader

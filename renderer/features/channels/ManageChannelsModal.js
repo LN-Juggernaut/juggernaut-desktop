@@ -8,12 +8,11 @@ import { hideManageChannelsModal } from './channelsSlice';
 const ManageChannelsModal = props => {
   const { manageChannelsModalVisible, hideManageChannelsModal } = props;
 
-  if (!manageChannelsModalVisible) {
-    return null;
-  }
-
   return (
-    <Modal onClose={hideManageChannelsModal}>
+    <Modal
+      isOpen={manageChannelsModalVisible}
+      onClose={hideManageChannelsModal}
+    >
       <ChannelsPage />
     </Modal>
   );

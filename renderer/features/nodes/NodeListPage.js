@@ -12,11 +12,11 @@ const NodeListPage = () => {
     <Page>
       <FixedHeader
         title="Open a Channel"
-        details="Before you can start using the lightning network you need to open your first channel. A channel allows you to send and receive payments and messages using the lightning Network. You want to connect to someone who will not charge you a lot to route payments and has enough capacity to support the payments you will make in the future."
+        details="A channel allows you to send and receive payments and messages on the lightning network with that node and anyone they are connected to."
         ImageComponent={NodeListIcon}
       />
       <FilteredNodeList
-        ctaText="Connect"
+        ctaText="Open"
         ctaClicked={node => {
           dispatch(showOpenChannelModal({ node }));
         }}

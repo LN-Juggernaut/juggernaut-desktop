@@ -3,6 +3,9 @@
  *        See https://github.com/webpack-contrib/sass-loader#imports
  */
 @import './css/variables.scss';
+@import '~@material/theme/dist/mdc.theme.css';
+@import '~@rmwc/theme/theme.css';
+@import '~@material/data-table/dist/mdc.data-table.css';
 @import '~@material/textfield/dist/mdc.textfield.min.css';
 @import '~@material/floating-label/dist/mdc.floating-label.css';
 @import '~@material/notched-outline/dist/mdc.notched-outline.css';

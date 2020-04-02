@@ -8,12 +8,8 @@ import { hideNodeListPageModal } from './nodesSlice';
 const NodeListPageModal = props => {
   const { nodeListPageModalVisible, hideNodeListPageModal } = props;
 
-  if (!nodeListPageModalVisible) {
-    return null;
-  }
-
   return (
-    <Modal onClose={hideNodeListPageModal}>
+    <Modal isOpen={nodeListPageModalVisible} onClose={hideNodeListPageModal}>
       <NodeListPage />
     </Modal>
   );

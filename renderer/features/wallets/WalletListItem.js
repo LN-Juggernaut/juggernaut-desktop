@@ -34,7 +34,7 @@ const WalletListItem = props => {
             raised
           />
         )}
-        <Button onClick={() => removeWallet(id)} label="Remove" danger />
+        <Button onClick={() => removeWallet(id)} label="Remove" />
       </ListItemMeta>
     </ListItem>
   );

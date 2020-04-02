@@ -15,7 +15,7 @@ const NodeListItem = ({ node, ctaText, ctaClicked }) => {
 
   return (
     <DataTableRow>
-      <DataTableCell>
+      <DataTableCell style={{ padding: '10px' }}>
         <Icon
           icon={
             <Avatar
@@ -34,7 +34,7 @@ const NodeListItem = ({ node, ctaText, ctaClicked }) => {
         {alias}
       </DataTableCell>
       <DataTableCell>{pubKey}</DataTableCell>
-      <DataTableCell>
+      <DataTableCell alignEnd>
         <Button raised label={ctaText} onClick={buttonClicked} />
       </DataTableCell>
     </DataTableRow>

@@ -15,19 +15,66 @@
 
 .modalHeader {
   position: absolute;
-  top: 23px;
-  right: 33px;
+  top: 1px;
+  right: 1px;
   z-index: 9000;
   color: $modal-close-icon-color;
   background-color: $modal-close-icon-bg-color;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .modalHeader i {
   cursor: pointer;
+  font-size: 30px;
 }
 
 .modalBody {
   margin: 0;
   height: 100vh;
+}
+
+.modal-enter {
+  opacity: 0.01;
+  transform: scale(0.9);
+}
+
+.modal-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  transition: all 200ms ease;
+}
+
+.modal-exit {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.modal-exit-active {
+  opacity: 0.01;
+  transform: scale(0.9);
+  transition: all 200ms ease;
+}
+
+.modal-slide-vertical-enter {
+  position: absolute;
+  top: calc(100vh);
+}
+
+.modal-slide-vertical-enter-active {
+  opacity: 1;
+  position: absolute;
+  top: 0;
+  transition: all 200ms ease;
+}
+
+.modal-slide-vertical-exit {
+  opacity: 1;
+  position: absolute;
+  top: 0;
+}
+
+.modal-slide-vertical-exit-active {
+  transition: all 200ms ease;
+  position: absolute;
+  top: calc(100vh);
 }

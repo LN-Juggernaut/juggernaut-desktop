@@ -12,7 +12,7 @@ const Connect = () => {
     <Page>
       <FixedHeader
         title="Connect To The Lightning Network"
-        details="Open your first channel with a node on the network.  A channel lets you send and receive messages and payments with anyone reachable through the node you choose.  You can connect and disconnect to nodes later if you change your mind."
+        details="A channel allows you to send and receive payments and messages on the lightning network with that node and anyone they are connected to."
         ImageComponent={NodeListIcon}
       />
 

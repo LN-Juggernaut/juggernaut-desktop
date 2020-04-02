@@ -1,24 +1,25 @@
-$primary-color: #89389e;
-$secondary-color: #ce1792;
-$default-text-color: rgb(128, 128, 128);
-$default-icon-color: rgb(128, 128, 128);
+$primary-color: rgb(140, 77, 249);
+$primary-alt-color: rgb(231, 245, 241);
 
-:root {
-  --mdc-theme-primary: #89389e;
-  --mdc-theme--on-primary: red;
-  --mdc-theme-secondary: red;
-  --mdc-theme-background: white;
-  --mdc-theme--primary-bg: white;
-  --mdc-theme--secondary-bg: white;
-}
+$secondary-color: #2b2b5c;
+$secondary-alt-color: rgb(230, 240, 239);
+
+$ternary-color: rgb(25, 45, 53);
+$ternary-alt-color: rgb(232, 234, 234);
+
+$gray: rgb(128, 128, 128);
+
+$default-text-color: $gray;
+$default-icon-color: $gray;
+
+$error-color: rgb(219, 53, 71);
+$link-color: $primary-color;
 
 $page-bg-color: rgba(124, 0, 255, 0.01);
-
-$fixed-header-gradient-from-color-old: rgba(102, 101, 250, 1);
-$fixed-header-gradient-to-color-old: rgba(126, 96, 230, 1);
+$page-bg-color: #f3f1f2;
 
 $fixed-header-gradient-from-color: $primary-color;
-$fixed-header-gradient-to-color: $secondary-color;
+$fixed-header-gradient-to-color: lighten($primary-color, 10%);
 
 $fixed-header-background: linear-gradient(
   90deg,
@@ -30,10 +31,10 @@ $elevated-search-icon-color: rgb(170, 170, 170);
 $elevated-search-bg-color: white;
 $elevated-search-text-color: black;
 
-$modal-wrapper-bg-color: rgba(0, 0, 0, 0.6);
-$modal-bg-color: rgb(250, 245, 255);
-$modal-close-icon-bg-color: rgb(200, 200, 200);
-$modal-close-icon-color: white;
+$modal-wrapper-bg-color: rgba(0, 0, 0, 0.9);
+$modal-bg-color: $page-bg-color;
+$modal-close-icon-bg-color: rgba(41, 44, 90, 0.5);
+$modal-close-icon-color: #f3f1f2;
 
 $payment-request-pending-bg-color: rgba(250, 215, 16, 0.2);
 $payment-request-paid-bg-color: rgba(0, 255, 0, 0.2);
@@ -49,7 +50,7 @@ $payment-request-pending-icon-bg-color: orange;
 // border between conversation list and conversation
 $chat-section-separator-color: rgb(230, 230, 230);
 $chat-left-width: 300px;
-$chat-attachment-button-color: blue;
+$chat-attachment-button-color: $primary-color;
 $chat-send-message-button-color: rgb(230, 179, 70);
 $chat-message-text-color: black;
 $chat-message-info-color: rgba(0, 0, 0, 0.38);
@@ -71,7 +72,6 @@ $channel-meter-bg-color: #555;
 $channel-meter-box-shadow-color: rgba(255, 255, 255, 0.3);
 $channel-meter-local-bg-color: rgb(43, 194, 83);
 $channel-meter-remote-bg-color: rgb(196, 75, 45);
-$link-color: blue;
 
 $menu-item-background-color: white;
 

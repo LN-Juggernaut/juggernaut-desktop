@@ -8,27 +8,16 @@ const NodeListHeader = () => {
         <Tooltip
           content={
             <div style={{ padding: '10px' }}>
-              <strong>Avatar</strong> is generated using the nodes advertised
-              alias and color attributes.
-            </div>
-          }
-        >
-          <DataTableHeadCell className="node-list-header-cell">
-            Avatar
-          </DataTableHeadCell>
-        </Tooltip>
-        <Tooltip
-          content={
-            <div style={{ padding: '10px' }}>
               <strong>Alias (PubKey)</strong> is the nodes advertised alias and
               the first six characters of their public key.
             </div>
           }
         >
           <DataTableHeadCell className="node-list-header-cell">
-            Alias (PubKey)
+            Alias
           </DataTableHeadCell>
         </Tooltip>
+
         <Tooltip
           content={
             <div style={{ padding: '10px' }}>
@@ -63,7 +52,7 @@ const NodeListHeader = () => {
           }
         >
           <DataTableHeadCell className="node-list-header-cell">
-            Minimum Fee
+            Min Fee
           </DataTableHeadCell>
         </Tooltip>
         <Tooltip
@@ -75,7 +64,7 @@ const NodeListHeader = () => {
           }
         >
           <DataTableHeadCell className="node-list-header-cell">
-            Minimum Amount
+            Min Amt
           </DataTableHeadCell>
         </Tooltip>
         <Tooltip

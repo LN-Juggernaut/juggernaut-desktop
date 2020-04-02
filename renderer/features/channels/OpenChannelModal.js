@@ -14,12 +14,10 @@ const OpenChannelModal = props => {
     fetchChannels
   } = props;
 
-  if (!openChannelModalVisible || !openChannelWithNode) {
-    return null;
-  }
+  const isOpen = openChannelModalVisible && openChannelWithNode;
 
   return (
-    <Modal onClose={hideOpenChannelModal}>
+    <Modal isOpen={isOpen} onClose={hideOpenChannelModal}>
       <OpenChannelForm
         node={openChannelWithNode}
         onSuccess={() => {

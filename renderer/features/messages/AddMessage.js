@@ -9,6 +9,8 @@ import {
   ListItemGraphic
 } from 'rmwc';
 import { queue } from '../../dialogQueue';
+import PaymentRequestIcon from '../images/icons/PaymentRequestIcon';
+import PaymentIcon from '../images/icons/PaymentIcon';
 
 const AddMessage = props => {
   const { balance, sendMessage } = props;
@@ -113,11 +115,11 @@ const AddMessage = props => {
           }}
         >
           <MenuItem onClick={sendPaymentRequest}>
-            <ListItemGraphic icon="receipt" />
+            <ListItemGraphic icon={<PaymentRequestIcon />} />
             Payment Request
           </MenuItem>
           <MenuItem onClick={attachPayment}>
-            <ListItemGraphic icon="attach_money" />
+            <ListItemGraphic icon={<PaymentIcon />} />
             Payment
           </MenuItem>
         </Menu>

@@ -8,12 +8,8 @@ import { hideAddWalletModal } from './walletsSlice';
 const AddWalletModal = props => {
   const { addWalletModalVisible, hideAddWalletModal } = props;
 
-  if (!addWalletModalVisible) {
-    return null;
-  }
-
   return (
-    <Modal onClose={hideAddWalletModal}>
+    <Modal isOpen={addWalletModalVisible} onClose={hideAddWalletModal}>
       <AddWallet />
     </Modal>
   );

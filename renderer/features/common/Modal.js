@@ -1,29 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Icon } from 'rmwc';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 const Modal = props => {
-  const { children, onClose } = props;
+  const { children, onClose, isOpen } = props;
 
   return (
-    <div className="modal-wrapper">
-      <div className="modal">
-        <div className="modalHeader">
-          <Icon
-            icon={{ icon: 'close', size: 'large' }}
-            onClick={() => onClose()}
-          />
-        </div>
-        <div className="modalBody">{children}</div>
-      </div>
-      <div className="modal-footer">&nbsp;</div>
-    </div>
+    <TransitionGroup component={null}>
+      {isOpen && (
+        <CSSTransition classNames="modal" timeout={200}>
+          <div className="modal-wrapper">
+            <div className="modal">
+              <div className="modalHeader">
+                <Icon
+                  icon={{ icon: 'close', size: 'large' }}
+                  onClick={() => onClose()}
+                />
+              </div>
+              <div className="modalBody">{children}</div>
+            </div>
+            <div className="modal-footer">&nbsp;</div>
+          </div>
+        </CSSTransition>
+      )}
+    </TransitionGroup>
   );
 };
 
 Modal.propTypes = {
   onClose: PropTypes.func.isRequired,
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  isOpen: PropTypes.bool.isRequired
 };
 
 export default Modal;

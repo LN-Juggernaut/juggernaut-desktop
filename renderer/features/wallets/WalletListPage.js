@@ -9,7 +9,7 @@ class WalletListPage extends Component {
     return (
       <Page>
         <FixedHeader
-          title="Your Nodes"
+          title="Nodes"
           details="A node is how you connect and communicate with the lightning network.  Choose which node you would like to use for this session."
           ImageComponent={WalletListIcon}
         />

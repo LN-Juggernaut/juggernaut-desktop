@@ -2,8 +2,8 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  width: 95%;
   margin: 0 auto;
+  padding: 0 25px;
   background-color: $page-bg-color;
 }
 
@@ -18,13 +18,15 @@
 }
 
 .fixed-header-content {
-  background: $fixed-header-background;
   margin: 0 auto;
-  color: white;
+  color: black;
   border-radius: 15px;
   margin-top: 15px;
   padding: 25px;
   text-align: left;
+  min-height: 140px;
+  mask-image: url('../resources/images/blob-4.png');
+  mask-size: 100% 100%;
 }
 
 .fixed-header-content-text {
@@ -35,11 +37,12 @@
   position: absolute;
   bottom: 15px;
   right: 50px;
+  fill: purple;
+  z-index: 1;
 }
+
 .fixed-header-content .title {
   text-transform: uppercase;
-  font-size: 24px;
-  margin-bottom: 15px;
 }
 
 .fixed-header-content .details {
@@ -95,9 +98,16 @@ svg {
     fill: #0b0038;
   }
   .st2 {
-    fill: #ffffff;
+    fill: #fff;
   }
   .st3 {
-    fill: #8156ef;
+    fill: rgb(18, 155, 116);
   }
+}
+
+.input-error {
+  margin-left: 10px;
+  margin-top: 5px;
+  font-size: 0.8em;
+  color: $error-color;
 }
