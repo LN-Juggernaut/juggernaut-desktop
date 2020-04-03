@@ -18,13 +18,15 @@ const OpenChannelModal = props => {
 
   return (
     <Modal isOpen={isOpen} onClose={hideOpenChannelModal}>
-      <OpenChannelForm
-        node={openChannelWithNode}
-        onSuccess={() => {
-          fetchChannels();
-          hideOpenChannelModal();
-        }}
-      />
+      {isOpen && (
+        <OpenChannelForm
+          node={openChannelWithNode}
+          onSuccess={() => {
+            fetchChannels();
+            hideOpenChannelModal();
+          }}
+        />
+      )}
     </Modal>
   );
 };
