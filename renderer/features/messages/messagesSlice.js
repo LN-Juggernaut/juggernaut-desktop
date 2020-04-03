@@ -37,6 +37,7 @@ const messagesSlice = createSlice({
           oldestMessageCreatedAt: Number.POSITIVE_INFINITY,
           loading: false,
           loadingNextPage: false,
+          hasFetched: false,
           hasMorePages: true,
           error: null,
           lastFetchedAt: null
@@ -71,6 +72,7 @@ const messagesSlice = createSlice({
           loading: false,
           loadingNextPage: false,
           hasMorePages: true,
+          hasFetched: false,
           oldestMessageCreatedAt: Number.POSITIVE_INFINITY,
           messages: [],
           error: null,
@@ -85,6 +87,7 @@ const messagesSlice = createSlice({
         state.messagesByConversationId[conversationId];
       conversationMessagesState.loading = false;
       conversationMessagesState.error = null;
+      conversationMessagesState.hasFetched = true;
       conversationMessagesState.lastFetchedAt = new Date().getTime();
       conversationMessagesState.messages = messages.map(message => {
         state.messagesById[message.id] = message;

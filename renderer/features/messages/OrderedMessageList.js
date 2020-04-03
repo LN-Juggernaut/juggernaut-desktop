@@ -82,8 +82,10 @@ const mapStateToProps = (state, { conversationId }) => {
     messageId => messagesById[messageId]
   );
 
+  const loading =
+    conversationMessagesState.loading || !conversationMessagesState.hasFetched;
   return {
-    loading: conversationMessagesState.loading,
+    loading,
     loadingNextPage: conversationMessagesState.loadingNextPage,
     hasMorePages: conversationMessagesState.hasMorePages,
     oldestMessageCreatedAt: conversationMessagesState.oldestMessageCreatedAt,

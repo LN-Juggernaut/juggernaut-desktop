@@ -98,6 +98,7 @@ const ConversationListHeader = props => {
             onClick={async () => {
               await disconnectWallet();
               dispatch(logout());
+              setOpen(false);
               history.push(routes.WALLETS);
             }}
           >
