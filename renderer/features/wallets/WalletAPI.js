@@ -22,6 +22,13 @@ export const connectWallet = async walletId => {
 
 export const disconnectWallet = async () => {
   const lnNode = getNodeInterface();
+  lnNode.removeAllListeners('subscribeMessages.data');
+  lnNode.removeAllListeners('subscribeChannelGraph.data');
+  lnNode.removeAllListeners('subscribeTransactions.data');
+  lnNode.removeAllListeners('subscribeChannelEvents.data');
+  lnNode.removeAllListeners('subscribePeerEvent.data');
+  lnNode.removeAllListeners('WALLET_LOCKED');
+  lnNode.removeAllListeners('WALLET_ACTIVE');
   return lnNode.disconnect();
 };
 
