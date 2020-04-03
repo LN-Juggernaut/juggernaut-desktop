@@ -51,11 +51,11 @@ OrderedConversationList.defaultProps = {
 
 const orderConversations = conversations => {
   return conversations.sort((a, b) => {
-    if (a.mostRecentMessageAt === null) {
-      return -1;
-    }
-    if (b.mostRecentMessageAt === null) {
+    if (!a.mostRecentMessageAt) {
       return 1;
+    }
+    if (!b.mostRecentMessageAt) {
+      return -1;
     }
     return b.mostRecentMessageAt - a.mostRecentMessageAt;
   });
@@ -70,12 +70,12 @@ const mapStateToProps = (state, props) => {
   } = state.conversations;
 
   const { searchQuery } = props;
-
   const conversationObjects = conversations
     .map(conversationId => conversationsById[conversationId])
     .filter(conversation => {
       return conversation.displayName.indexOf(searchQuery) >= 0;
     });
+
   const orderedConversations = orderConversations(conversationObjects);
 
   return {

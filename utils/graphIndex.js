@@ -46,11 +46,20 @@ const findByPubKey = pubKey => {
 };
 
 const search = options => {
-  const { query = '', page = 0, pageSize = 25, sort = defaultSort } = options;
+  const {
+    query = '',
+    page = 0,
+    pageSize = 25,
+    sort = defaultSort,
+    filteredPubKeys = []
+  } = options;
   return nodes.pubKeys
     .filter(pubKey => {
       const node = nodes.byPubKey[pubKey];
-      return node.alias.includes(query) || node.pubKey === query;
+      return (
+        (node.alias.includes(query) || node.pubKey === query) &&
+        !filteredPubKeys.includes(node.pubKey)
+      );
     })
     .map(pubKey => {
       return nodes.byPubKey[pubKey];

@@ -54,6 +54,7 @@ const SearchableAddConversation = ({ walletId }) => {
           ctaText="Start Conversation"
           ctaClicked={handleNewConversation}
           viewType="simple"
+          filterConversations
         />
       )}
     </Page>

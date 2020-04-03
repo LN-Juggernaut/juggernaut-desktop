@@ -15,15 +15,18 @@ const FilteredNodeList = props => {
     loading,
     fetchNodes,
     viewType,
-    lastFetch
+    lastFetch,
+    filteredPubKeys
   } = props;
 
   const [query, setQuery] = useState('');
-  const [nodes, setNodes] = useState(graphIndex.search({ query }));
+  const [nodes, setNodes] = useState(
+    graphIndex.search({ query, filteredPubKeys })
+  );
 
   const updateQuery = query => {
     setQuery(query);
-    setNodes(graphIndex.search({ query }));
+    setNodes(graphIndex.search({ query, filteredPubKeys }));
   };
 
   useEffect(() => {
@@ -64,7 +67,8 @@ FilteredNodeList.propTypes = {
   loading: PropTypes.bool.isRequired,
   fetchNodes: PropTypes.func.isRequired,
   viewType: PropTypes.string,
-  lastFetch: PropTypes.number
+  lastFetch: PropTypes.number,
+  filteredPubKeys: PropTypes.arrayOf(PropTypes.string).isRequired
 };
 
 FilteredNodeList.defaultProps = {
@@ -72,9 +76,20 @@ FilteredNodeList.defaultProps = {
   lastFetch: null
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, props) => {
   const { loading, lastFetch } = state.nodes;
-  return { loading, lastFetch };
+  const { conversationsById, conversations } = state.conversations;
+  const { filterConversations } = props;
+  const filteredPubKeys = [];
+
+  if (filterConversations) {
+    conversations.forEach(conversationId => {
+      const conversation = conversationsById[conversationId];
+      filteredPubKeys.push(conversation.pubkey);
+    });
+  }
+
+  return { loading, lastFetch, filteredPubKeys };
 };
 
 const mapDispatchToProps = {
