@@ -46,8 +46,8 @@ const createWindow = async () => {
 
   const winOptions = {
     show: false,
-    width,
-    height: 728,
+    width: 1000,
+    height: 550,
     backgroundColor: 'white',
     minWidth: 1000,
     minHeight: 550,
@@ -62,7 +62,7 @@ const createWindow = async () => {
     }
   };
 
-  if (externalDisplay) {
+  if (isDev && externalDisplay) {
     winOptions.width = 3000;
     winOptions.x = externalDisplay.bounds.x + 250;
     winOptions.y = externalDisplay.bounds.y + 50;
@@ -141,7 +141,9 @@ const createWindow = async () => {
 
   mainWindow.webContents.once('dom-ready', () => {
     mainLog.trace('webContents.dom-ready');
-    mainWindow.openDevTools();
+    if (process.env.NODE_ENV === 'development' || process.env.DEBUG_PROD) {
+      mainWindow.openDevTools();
+    }
   });
 };
 
