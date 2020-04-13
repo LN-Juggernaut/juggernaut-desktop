@@ -23,11 +23,13 @@ const TextField = props => {
     onBlur,
     onFocus,
     label,
-    trailingIcon
+    trailingIcon,
+    type
   } = props;
   return (
     <>
       <RmwcTextField
+        type={type}
         name={name}
         value={value}
         label={label}
@@ -52,6 +54,7 @@ TextField.propTypes = {
   onBlur: PropTypes.func,
   onFocus: PropTypes.func,
   label: PropTypes.string,
+  type: PropTypes.string,
   trailingIcon: PropTypes.shape({
     icon: PropTypes.string,
     tabIndex: PropTypes.number,
@@ -64,6 +67,7 @@ TextField.defaultProps = {
   name: '',
   value: '',
   label: '',
+  type: 'text',
   onChange: () => {},
   onBlur: () => {},
   onFocus: () => {},

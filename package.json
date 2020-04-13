@@ -26,7 +26,7 @@
     "lint-styles-fix": "yarn lint-styles-fix-base \"renderer/features/**/*.js\"",
     "lint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check",
     "lint-ci": "yarn lint && yarn lint-styles",
-    "package": "yarn build && electron-builder",
+    "package": "yarn build && electron-builder -mwl",
     "release": "yarn package --publish onTagOrDraft",
     "postinstall": "yarn build-dll && electron-builder install-app-deps",
     "prestart": "cross-env NODE_CONFIG_ENV=production yarn build",

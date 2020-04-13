@@ -4,10 +4,7 @@ import { saveMessagesToDatabase } from '../messages/MessageAPI';
 
 export const unlockWallet = async password => {
   const lnNode = getNodeInterface();
-
-  if (lnNode.state === 'locked') {
-    await lnNode.unlock(password);
-  }
+  await lnNode.unlock(password);
 };
 
 export const connectWallet = async walletId => {
