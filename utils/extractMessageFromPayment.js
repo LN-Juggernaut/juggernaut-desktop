@@ -5,13 +5,21 @@ import {
 } from './customRecords';
 
 const extractMessageFromPayment = async payment => {
-  const htlcWithCustomRecords = payment.htlcs.find(htlc => {
+  const htlcs = payment.htlcs || [];
+  const htlcWithCustomRecords = htlcs.find(htlc => {
     if (htlc.status === 'SUCCEEDED') {
-      const hopCount = htlc.route.hops.length;
-      if (hopCount === 0) {
+      if (!htlc.route) {
         return false;
       }
-      const lastHop = htlc.route.hops[hopCount - 1];
+      const hops = htlc.route.hops || [];
+      if (hops.length === 0) {
+        return false;
+      }
+      const lastHop = hops[hops.length - 1];
+      if (!lastHop) {
+        return false;
+      }
+
       lastHop.custom_records = decodeCustomRecords(lastHop.custom_records);
       return validCustomRecords(lastHop.custom_records);
     }

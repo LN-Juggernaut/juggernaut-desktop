@@ -5,7 +5,8 @@ import {
 } from './customRecords';
 
 const extractMessageFromInvoice = invoice => {
-  const settledHtlcWithCustomRecords = invoice.htlcs.find(htlc => {
+  const htlcs = invoice.htlcs || [];
+  const settledHtlcWithCustomRecords = htlcs.find(htlc => {
     htlc.custom_records = decodeCustomRecords(htlc.custom_records);
     return htlc.state === 'SETTLED' && validCustomRecords(htlc.custom_records);
   });
@@ -25,6 +26,33 @@ const extractMessageFromInvoice = invoice => {
     requestIdentifierBytes
   } = parseCustomRecords(customRecords);
 
+  const requestIdentifier = requestIdentifierBytes
+    ? requestIdentifierBytes.toString('hex')
+    : null;
+
+  const contentType = contentTypeBytes
+    ? contentTypeBytes.toString('utf8')
+    : null;
+
+  const senderPubkey = senderBytes ? senderBytes.toString('hex') : null;
+
+  let createdAt = parseInt(invoice.creation_date, 10);
+  if (isNaN(createdAt)) {
+    createdAt = null;
+  } else {
+    createdAt *= 1000;
+  }
+
+  const content = messageBytes ? messageBytes.toString('utf8') : null;
+
+  const preimage = invoice.r_preimage
+    ? invoice.r_preimage.toString('hex')
+    : null;
+
+  const settleIndex = invoice.settle_index;
+  const amountMSats = invoice.amt_paid_msat || 0;
+  const feeAmountMSats = 0;
+
   return {
     senderBytes,
     signatureBytes,
@@ -32,17 +60,15 @@ const extractMessageFromInvoice = invoice => {
     messageBytes,
     contentTypeBytes,
     requestIdentifierBytes,
-    requestIdentifier: requestIdentifierBytes
-      ? requestIdentifierBytes.toString('hex')
-      : null,
-    contentType: contentTypeBytes.toString('utf8'),
-    senderPubkey: senderBytes.toString('hex'),
-    createdAt: parseInt(invoice.creation_date, 10) * 1000,
-    content: messageBytes.toString('utf8'),
-    preimage: invoice.r_preimage.toString('hex'),
-    settleIndex: invoice.settle_index,
-    amountMSats: invoice.amt_paid_msat,
-    feeAmountMSats: 0
+    requestIdentifier,
+    contentType,
+    senderPubkey,
+    createdAt,
+    content,
+    preimage,
+    settleIndex,
+    amountMSats,
+    feeAmountMSats
   };
 };
 
