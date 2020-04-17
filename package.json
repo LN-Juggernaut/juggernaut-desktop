@@ -1,7 +1,7 @@
 {
   "name": "juggernaut-desktop",
   "productName": "Juggernaut",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Decentralized messaging and payments",
   "scripts": {
     "build": "cross-env NODE_CONFIG_ENV=production webpack -r @babel/register --config webpack/webpack.config.prod.js",

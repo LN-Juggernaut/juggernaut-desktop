@@ -1,8 +1,10 @@
 <img src="./resources/images/juggernaut_horizontal.png" width="100%" />
-<br>
+<br />
 
-**Juggernaut** utilizes the Lightning Network to provide end-to-end encrypted, onion-routed, censorship resistant, peer-to-peer messaging with native payment capabilities.
+**Juggernaut** utilizes the Lightning Network to provide end-to-end encrypted, onion-routed, censorship resistanst, peer-to-peer messaging with native payment capabilities.
 
+<br/>
+<img src="./resources/images/screenshot.png" width="100%" />
 
 ## Maintainers
 
