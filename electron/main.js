@@ -12,6 +12,7 @@
 import { app, BrowserWindow, screen } from 'electron';
 import isDev from 'electron-is-dev';
 import path from 'path';
+import os from 'os';
 import installExtension, {
   REACT_DEVELOPER_TOOLS,
   REDUX_DEVTOOLS
