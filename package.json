@@ -63,7 +63,7 @@
   },
   "build": {
     "productName": "Juggernaut",
-    "appId": "io.juggernautlabs",
+    "appId": "com.getjuggernaut",
     "generateUpdatesFilesForAllChannels": true,
     "publish": [
       "github"
@@ -83,6 +83,7 @@
       }
     ],
     "artifactName": "${productName}-${os}-${arch}-v${version}.${ext}",
+    "afterSign": "./scripts/afterSignHook.js",
     "asarUnpack": [
       "**/*.node"
     ],
@@ -237,6 +238,7 @@
     "csp-html-webpack-plugin": "^3.0.4",
     "css-loader": "^3.3.2",
     "detect-port": "^1.3.0",
+    "dotenv": "^8.2.0",
     "electron": "8.2.0",
     "electron-builder": "22.4.1",
     "electron-devtools-installer": "2.2.4",
