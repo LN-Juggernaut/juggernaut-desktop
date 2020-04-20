@@ -128,7 +128,8 @@
         {
           "target": "AppImage",
           "arch": [
-            "x64"
+            "x64",
+            "armv7l"
           ]
         }
       ],
