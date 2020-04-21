@@ -6,6 +6,13 @@
 <br/>
 <img src="./resources/images/screenshot.png" width="100%" />
 
+## How to enable Keysend
+On lnd.conf add this line:
+accept-keysend=1
+
+Or run lnd with this argument:
+--accept-keysend
+
 ## Maintainers
 
 - [John Cantrell (@JohnCantrell97)](https://github.com/johncantrell97)
