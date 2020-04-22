@@ -38,12 +38,15 @@ const validate = values => {
 const OpenChannelForm = props => {
   const { node, onSuccess } = props;
   const { addresses, pubKey } = node;
-  const { addr } = addresses[0];
 
   const onSubmit = async values => {
     const { localSatoshis, remoteSatoshis, targetConfirmations } = values;
     const lnNode = getNodeInterface();
-
+    if (addresses.length === 0) {
+      return {
+        [FORM_ERROR]: 'This node is not advertising any addresses to connect to'
+      };
+    }
     try {
       await lnNode.openChannel({
         pubkey: pubKey,
@@ -51,7 +54,7 @@ const OpenChannelForm = props => {
         remoteSatoshis: parseInt(remoteSatoshis, 10),
         targetConfirmations: parseInt(targetConfirmations, 10),
         isPrivate: false,
-        host: addr
+        host: addresses[0].addr
       });
       onSuccess();
     } catch (e) {
