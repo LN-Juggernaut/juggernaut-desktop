@@ -37,7 +37,9 @@ const AddMessage = props => {
       inputs: [
         {
           name: 'amount',
-          label: 'Amount'
+          label: 'Amount',
+          required: true,
+          type: 'number'
         },
         {
           name: 'memo',
@@ -50,8 +52,16 @@ const AddMessage = props => {
 
     if (paymentRequestResponse) {
       const { amount, memo } = paymentRequestResponse;
+      const satAmount = parseInt(amount, 10);
+      if (isNaN(satAmount) || !amount.match(/^[0-9]+$/) || satAmount <= 0) {
+        queue.alert({
+          title: 'Invalid Payment Request',
+          body: 'Amount must be an integer greater than zero'
+        });
+        return;
+      }
       handleSendMessage({
-        message: `${parseInt(amount, 10) * 1000},${memo}`,
+        message: `${satAmount * 1000},${memo}`,
         amount: balance,
         contentType: 'paymentrequest',
         requestIdentifier: ''
@@ -68,7 +78,9 @@ const AddMessage = props => {
       inputs: [
         {
           name: 'amount',
-          label: 'Amount'
+          label: 'Amount',
+          required: true,
+          type: 'number'
         },
         {
           name: 'memo',
@@ -81,9 +93,17 @@ const AddMessage = props => {
 
     if (paymentAmountResponse) {
       const { amount, memo } = paymentAmountResponse;
+      const satAmount = parseInt(amount, 10);
+      if (isNaN(satAmount) || !amount.match(/^[0-9]+$/) || satAmount <= 0) {
+        queue.alert({
+          title: 'Invalid Send Amount',
+          body: `Amount must be an integer greater or equal to zero`
+        });
+        return;
+      }
       handleSendMessage({
         message: `${memo}`,
-        amount: parseInt(amount, 10) * 1000,
+        amount: satAmount * 1000,
         contentType: 'payment',
         requestIdentifier: ''
       });
