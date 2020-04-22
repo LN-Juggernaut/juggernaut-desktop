@@ -64,7 +64,8 @@ const ConversationHeader = props => {
                     acceptLabel: 'Save',
                     cancelLabel: 'Cancel',
                     inputProps: {
-                      placeholder: feeLimitMSats
+                      placeholder: feeLimitMSats,
+                      type: 'number'
                     }
                   });
                   if (newLimit !== null && !validFeeLimit(newLimit)) {

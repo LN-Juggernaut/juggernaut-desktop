@@ -30,63 +30,98 @@ const AddMessage = props => {
 
   const sendPaymentRequest = async () => {
     setMenuOpen(false);
-    const paymentRequestResponse = await queue.promptForm({
-      title: 'Request Payment',
-      body:
-        'Send a payment request by specifying how many sats you want them to pay and an optional memo.',
-      inputs: [
-        {
-          name: 'amount',
-          label: 'Amount'
-        },
-        {
-          name: 'memo',
-          label: 'Memo (Optional)'
-        }
-      ],
-      acceptLabel: 'Send',
-      cancelLabel: 'Cancel'
-    });
 
-    if (paymentRequestResponse) {
-      const { amount, memo } = paymentRequestResponse;
-      handleSendMessage({
-        message: `${parseInt(amount, 10) * 1000},${memo}`,
-        amount: balance,
-        contentType: 'paymentrequest',
-        requestIdentifier: ''
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
+      const paymentRequestResponse = await queue.promptForm({
+        title: 'Request Payment',
+        body:
+          'Send a payment request by specifying how many sats you want them to pay and an optional memo.',
+        inputs: [
+          {
+            name: 'amount',
+            label: 'Amount',
+            required: true,
+            type: 'number'
+          },
+          {
+            name: 'memo',
+            label: 'Memo (Optional)'
+          }
+        ],
+        acceptLabel: 'Send',
+        cancelLabel: 'Cancel'
       });
+
+      if (!paymentRequestResponse) {
+        // user canceled dialog prompt
+        break;
+      }
+
+      const { amount, memo } = paymentRequestResponse;
+      const satAmount = parseInt(amount, 10);
+      if (isNaN(satAmount) || !amount.match(/^[0-9]+$/) || satAmount <= 0) {
+        queue.alert({
+          title: 'Invalid Payment Request',
+          body: 'Amount must be an integer greater than zero'
+        });
+      } else {
+        handleSendMessage({
+          message: `${satAmount * 1000},${memo}`,
+          amount: balance,
+          contentType: 'paymentrequest',
+          requestIdentifier: ''
+        });
+        break;
+      }
     }
   };
 
   const attachPayment = async () => {
     setMenuOpen(false);
 
-    const paymentAmountResponse = await queue.promptForm({
-      title: 'Send Money',
-      body: 'How many sats would you like to send?',
-      inputs: [
-        {
-          name: 'amount',
-          label: 'Amount'
-        },
-        {
-          name: 'memo',
-          label: 'Memo (Optional)'
-        }
-      ],
-      acceptLabel: 'Send',
-      cancelLabel: 'Cancel'
-    });
-
-    if (paymentAmountResponse) {
-      const { amount, memo } = paymentAmountResponse;
-      handleSendMessage({
-        message: `${memo}`,
-        amount: parseInt(amount, 10) * 1000,
-        contentType: 'payment',
-        requestIdentifier: ''
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
+      const paymentAmountResponse = await queue.promptForm({
+        title: 'Send Money',
+        body: 'How many sats would you like to send?',
+        inputs: [
+          {
+            name: 'amount',
+            label: 'Amount',
+            required: true,
+            type: 'number'
+          },
+          {
+            name: 'memo',
+            label: 'Memo (Optional)'
+          }
+        ],
+        acceptLabel: 'Send',
+        cancelLabel: 'Cancel'
       });
+
+      if (!paymentAmountResponse) {
+        // user canceled dialog prompt
+        break;
+      }
+
+      const { amount, memo } = paymentAmountResponse;
+      const satAmount = parseInt(amount, 10);
+      if (isNaN(satAmount) || !amount.match(/^[0-9]+$/) || satAmount <= 0) {
+        queue.alert({
+          title: 'Invalid Send Amount',
+          body: `Amount must be an integer greater or equal to zero`
+        });
+      } else {
+        handleSendMessage({
+          message: `${memo}`,
+          amount: satAmount * 1000,
+          contentType: 'payment',
+          requestIdentifier: ''
+        });
+        break;
+      }
     }
   };
 
