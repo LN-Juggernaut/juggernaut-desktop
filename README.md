@@ -6,12 +6,19 @@
 <br/>
 <img src="./resources/images/screenshot.png" width="100%" />
 
-## How to enable Keysend
-On lnd.conf add this line:
-accept-keysend=1
+## Requirements
+* Have a Bitcoin + Lightning Node (LND 0.9.x or greater) fully synced.
+* Have access to modify "lnd.conf" or execute LND
+* Enable Keysend
 
-Or run lnd with this argument:
---accept-keysend
+  ### How to enable Keysend 
+  On lnd.conf add this line:
+  * accept-keysend=1
+
+  Or run lnd with this argument:
+  * --accept-keysend
+
+  (Keysend is an experimental feature, don't be reckless)
 
 ## Maintainers
 
