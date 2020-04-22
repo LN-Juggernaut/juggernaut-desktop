@@ -12,7 +12,9 @@ const PaymentSender = props => {
       </div>
       <div className="content-wrapper">
         Sent {amountSats} sats
-        <div className="payment-memo">&nbsp;-&nbsp;&apos;{content}&apos;</div>
+        {content && (
+          <div className="payment-memo">&nbsp;-&nbsp;&apos;{content}&apos;</div>
+        )}
       </div>
     </div>
   );

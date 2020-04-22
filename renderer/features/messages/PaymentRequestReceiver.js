@@ -46,7 +46,9 @@ const PaymentRequestReceiver = props => {
       </div>
       <div className="content-wrapper">
         {wantsOrWanted} you to pay {amountSats} sats
-        <div className="payment-memo">&nbsp;-&nbsp;&apos;{memo}&apos;</div>
+        {memo && (
+          <div className="payment-memo">&nbsp;-&nbsp;&apos;{memo}&apos;</div>
+        )}
       </div>
     </div>
   );
