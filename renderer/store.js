@@ -2,12 +2,17 @@ import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import { createHashHistory } from 'history';
 import { routerMiddleware, routerActions } from 'connected-react-router';
 import { createLogger } from 'redux-logger';
+import createIpc from 'redux-electron-ipc';
 import createRootReducer from './rootReducer';
+import { terminateApp } from './features/app/appSlice';
 
 export const history = createHashHistory();
 const rootReducer = createRootReducer(history);
 const router = routerMiddleware(history);
-const middleware = [...getDefaultMiddleware(), router];
+
+const ipc = createIpc({ terminateApp });
+
+const middleware = [...getDefaultMiddleware(), router, ipc];
 let devTools = false;
 
 const excludeLoggerEnvs = ['test', 'production'];

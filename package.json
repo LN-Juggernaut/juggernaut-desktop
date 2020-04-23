@@ -1,7 +1,7 @@
 {
   "name": "juggernaut-desktop",
   "productName": "Juggernaut",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Decentralized messaging and payments",
   "scripts": {
     "build": "cross-env NODE_CONFIG_ENV=production webpack -r @babel/register --config webpack/webpack.config.prod.js",
@@ -328,6 +328,7 @@
     "react-router-dom": "^5.1.2",
     "react-scroll-to": "^3.0.0-beta.4",
     "react-transition-group": "^4.3.0",
+    "redux-electron-ipc": "https://github.com/LN-Juggernaut/redux-electron-ipc#b513220d085ad3e96e459d7efcdfc37bf75417b6",
     "rmwc": "^6.0.8",
     "source-map-support": "^0.5.16"
   },

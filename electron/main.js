@@ -29,6 +29,10 @@ if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = 'development';
 }
 
+if(!app.requestSingleInstanceLock()){
+  app.quit();
+}
+
 const installExtensions = async () => {
   const installer = require('electron-devtools-installer');
   const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
@@ -81,6 +85,7 @@ const createWindow = async () => {
 
   mainWindow.on('closed', () => {
     mainWindow = null;
+    juggernaut.mainWindow = null;
   });
 
   app.on('before-quit', event => {
@@ -109,8 +114,42 @@ const createWindow = async () => {
 
   app.on('activate', () => {
     mainLog.trace('app.activate');
-    mainWindow.show();
+    if(mainWindow){
+      mainWindow.show();
+    }
   });
+
+  app.on('second-instance', (event, cli) => {
+    if(mainWindow) {
+      if(mainWindow.isMinimized()) {
+        mainWindow.restore()
+      }
+      mainWindow.focus()
+    }
+  })
+
+  mainWindow.on('close', event => {
+    mainLog.trace('mainWindow.close')
+    if (os.platform() === 'darwin') {
+      if (!mainWindow.forceClose) {
+        event.preventDefault()
+        if (mainWindow.isFullScreen()) {
+          mainWindow.once('leave-full-screen', () => {
+            mainWindow.hide()
+          })
+          mainWindow.setFullScreen(false)
+        } else {
+          mainWindow.hide()
+        }
+      }
+    } else if (!mainWindow.forceClose) {
+      event.preventDefault()
+      mainWindow.hide()
+      app.quit()
+    }
+  })
+
+
 
   mainLog.info(process.env.NODE_ENV);
 

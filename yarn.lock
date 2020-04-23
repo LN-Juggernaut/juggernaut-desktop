@@ -13204,6 +13204,10 @@ redux-devtools-extension@^2.13.8:
   resolved "https://registry.yarnpkg.com/redux-devtools-extension/-/redux-devtools-extension-2.13.8.tgz#37b982688626e5e4993ff87220c9bbb7cd2d96e1"
   integrity sha512-8qlpooP2QqPtZHQZRhx3x3OP5skEV1py/zUdMY28WNAocbafxdG2tRD1MWE7sp8obGMNYuLWanhhQ7EQvT1FBg==
 
+"redux-electron-ipc@https://github.com/LN-Juggernaut/redux-electron-ipc#b513220d085ad3e96e459d7efcdfc37bf75417b6":
+  version "1.2.0"
+  resolved "https://github.com/LN-Juggernaut/redux-electron-ipc#b513220d085ad3e96e459d7efcdfc37bf75417b6"
+
 redux-immutable-state-invariant@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/redux-immutable-state-invariant/-/redux-immutable-state-invariant-2.1.0.tgz#308fd3cc7415a0e7f11f51ec997b6379c7055ce1"
