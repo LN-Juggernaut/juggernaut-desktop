@@ -58,7 +58,6 @@ const NodeListItem = ({ node, ctaText, ctaClicked }) => {
 
 NodeListItem.propTypes = {
   node: nodeType.isRequired,
-  pubKey: PropTypes.string.isRequired,
   ctaText: PropTypes.string.isRequired,
   ctaClicked: PropTypes.func.isRequired
 };
