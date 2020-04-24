@@ -14,7 +14,8 @@ const OpenChannelModal = props => {
     fetchChannels
   } = props;
 
-  const isOpen = openChannelModalVisible && openChannelWithNode;
+  // Without explicitly casting openChannelWithNode, isOpen might be Object
+  const isOpen = openChannelModalVisible && !!openChannelWithNode;
 
   return (
     <Modal isOpen={isOpen} onClose={hideOpenChannelModal}>
