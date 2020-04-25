@@ -164,6 +164,7 @@ const Conversation = props => {
         id={id}
         color={color}
         displayName={displayName}
+        pubkey={withPubkey}
         balance={balance}
         feeLimitMSats={feeLimitMSats}
       />
