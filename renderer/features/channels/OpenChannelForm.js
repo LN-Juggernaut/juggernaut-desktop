@@ -6,13 +6,11 @@ import { FORM_ERROR } from 'final-form';
 import { Button, TextField } from '../../../utils/forms';
 import getNodeInterface from '../../../utils/getNodeInterface';
 import errors from '../../constants/errors.json';
-import { nodeType, nodeDetailsType } from '../../types';
 import { Page, FixedHeader, ScrollableContent } from '../common';
 import { OpenChannelIcon } from '../images';
 import sharedStyles from '../../../utils/styles';
 
 const initialValues = {
-  pubkey: '',
   localSatoshis: '50000',
   remoteSatoshis: '1000',
   targetConfirmations: '1'
@@ -20,15 +18,18 @@ const initialValues = {
 
 const validate = values => {
   const errors = {};
-  const requiredFields = [
+  const requiredPositiveIntFields = [
     { name: 'localSatoshis', label: 'Local Balance' },
     { name: 'remoteSatoshis', label: 'Remote Balance' },
     { name: 'targetConfirmations', label: 'Setup Time' }
   ];
 
-  requiredFields.forEach(requiredField => {
-    if (!values[requiredField.name]) {
-      errors[requiredField.name] = `${requiredField.label} is required`;
+  requiredPositiveIntFields.forEach(field => {
+    if (!values[field.name]) {
+      errors[field.name] = `${field.label} is required`;
+    }
+    if (+values[field.name] <= 0) {
+      errors[field.name] = `${field.label} must be a positive integer`;
     }
   });
 
@@ -36,30 +37,24 @@ const validate = values => {
 };
 
 const OpenChannelForm = props => {
-  const { node, onSuccess } = props;
-  const { addresses, pubKey } = node;
+  const { pubkey, onSuccess } = props;
 
   const onSubmit = async values => {
     const { localSatoshis, remoteSatoshis, targetConfirmations } = values;
     const lnNode = getNodeInterface();
-    if (addresses.length === 0) {
-      return {
-        [FORM_ERROR]: 'This node is not advertising any addresses to connect to'
-      };
-    }
+
     try {
       await lnNode.openChannel({
-        pubkey: pubKey,
-        localSatoshis: parseInt(localSatoshis, 10),
-        remoteSatoshis: parseInt(remoteSatoshis, 10),
-        targetConfirmations: parseInt(targetConfirmations, 10),
-        isPrivate: false,
-        host: addresses[0].addr
+        pubkey,
+        localSatoshis: +localSatoshis,
+        remoteSatoshis: +remoteSatoshis,
+        targetConfirmations: +targetConfirmations
       });
       onSuccess();
     } catch (e) {
-      let errorMessage;
+      console.log(e);
 
+      let errorMessage;
       if (e.message === errors.CHANNEL_TOO_SMALL) {
         errorMessage =
           'Failed to open channel because the capacity is too small.  Please increase the amounts and try again.';
@@ -67,8 +62,7 @@ const OpenChannelForm = props => {
         errorMessage =
           'Failed to open channel because the peer node is either offline or not in sync with the rest of the network.';
       } else {
-        errorMessage =
-          'Failed to open channel because something unexpected happened.  Please try again.';
+        errorMessage = e.message;
       }
       return {
         [FORM_ERROR]: errorMessage
@@ -100,6 +94,8 @@ const OpenChannelForm = props => {
                       type="number"
                       error={meta.error}
                       touched={meta.touched}
+                      pattern="[0-9]+"
+                      required="true"
                       label="Local Balance (satoshis)"
                     />
                   )}
@@ -113,6 +109,8 @@ const OpenChannelForm = props => {
                       type="number"
                       error={meta.error}
                       touched={meta.touched}
+                      pattern="[0-9]+"
+                      required="true"
                       label="Remote Balance (satoshis)"
                     />
                   )}
@@ -126,6 +124,8 @@ const OpenChannelForm = props => {
                       type="number"
                       error={meta.error}
                       touched={meta.touched}
+                      pattern="[0-9]+"
+                      required="true"
                       label="Target Confirmations"
                     />
                   )}
@@ -156,7 +156,7 @@ const OpenChannelForm = props => {
 };
 
 OpenChannelForm.propTypes = {
-  node: PropTypes.oneOfType([nodeType, nodeDetailsType]).isRequired,
+  pubkey: PropTypes.string.isRequired,
   onSuccess: PropTypes.func.isRequired
 };
 

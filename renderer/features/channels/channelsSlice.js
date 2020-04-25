@@ -10,7 +10,7 @@ const channelsSlice = createSlice({
     closingChannels: [],
     loading: false,
     openChannelModalVisible: false,
-    openChannelWithNode: null,
+    openChannelWithPubkey: null,
     manageChannelsModalVisible: false,
     error: null
   },
@@ -21,7 +21,7 @@ const channelsSlice = createSlice({
       state.closingChannels = [];
       state.openChannelModalVisible = false;
       state.manageChannelsModalVisible = false;
-      state.openChannelWithNode = null;
+      state.openChannelWithPubkey = null;
       state.loading = false;
       state.error = null;
     }
@@ -43,9 +43,9 @@ const channelsSlice = createSlice({
       state.error = error;
     },
     showOpenChannelModal: (state, action) => {
-      const { node } = action.payload;
+      const { pubkey } = action.payload;
       state.openChannelModalVisible = true;
-      state.openChannelWithNode = node;
+      state.openChannelWithPubkey = pubkey;
     },
     hideOpenChannelModal: state => {
       state.openChannelModalVisible = false;

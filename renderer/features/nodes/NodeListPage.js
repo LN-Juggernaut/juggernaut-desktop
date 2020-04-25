@@ -18,7 +18,7 @@ const NodeListPage = () => {
       <FilteredNodeList
         ctaText="Open"
         ctaClicked={node => {
-          dispatch(showOpenChannelModal({ node }));
+          dispatch(showOpenChannelModal({ pubkey: node.pubKey }));
         }}
       />
     </Page>

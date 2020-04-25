@@ -22,7 +22,7 @@ const ConversationDetail = props => {
             label="Open Channel"
             outlined
             onClick={() => {
-              dispatch(showOpenChannelModal({ node: conversationDetails }));
+              dispatch(showOpenChannelModal({ pubkey: pubKey }));
             }}
           />
         </div>

@@ -4,24 +4,23 @@ import PropTypes from 'prop-types';
 import Modal from '../common/Modal';
 import OpenChannelForm from './OpenChannelForm';
 import { fetchChannels, hideOpenChannelModal } from './channelsSlice';
-import { nodeType, nodeDetailsType } from '../../types';
 
 const OpenChannelModal = props => {
   const {
-    openChannelWithNode,
+    openChannelWithPubkey,
     openChannelModalVisible,
     hideOpenChannelModal,
     fetchChannels
   } = props;
 
-  // Without explicitly casting openChannelWithNode, isOpen might be Object
-  const isOpen = openChannelModalVisible && !!openChannelWithNode;
+  // Without explicitly casting openChannelWithPubkey, isOpen might be object
+  const isOpen = openChannelModalVisible && !!openChannelWithPubkey;
 
   return (
     <Modal isOpen={isOpen} onClose={hideOpenChannelModal}>
       {isOpen && (
         <OpenChannelForm
-          node={openChannelWithNode}
+          pubkey={openChannelWithPubkey}
           onSuccess={() => {
             fetchChannels();
             hideOpenChannelModal();
@@ -35,18 +34,19 @@ const OpenChannelModal = props => {
 OpenChannelModal.propTypes = {
   hideOpenChannelModal: PropTypes.func.isRequired,
   fetchChannels: PropTypes.func.isRequired,
-  openChannelWithNode: PropTypes.oneOfType([nodeType, nodeDetailsType]),
+  openChannelWithPubkey: PropTypes.string,
   openChannelModalVisible: PropTypes.bool.isRequired
 };
+
 OpenChannelModal.defaultProps = {
-  openChannelWithNode: null
+  openChannelWithPubkey: null
 };
 
 const mapStateToProps = state => {
-  const { openChannelModalVisible, openChannelWithNode } = state.channels;
+  const { openChannelModalVisible, openChannelWithPubkey } = state.channels;
   return {
     openChannelModalVisible,
-    openChannelWithNode
+    openChannelWithPubkey
   };
 };
 
