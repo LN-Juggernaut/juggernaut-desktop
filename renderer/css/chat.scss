@@ -68,6 +68,10 @@ input.add-message {
   color: $chat-attachment-button-color;
 }
 
+.addMessageWrapper button.emoji-mart-anchor {
+  color: black;
+}
+
 input.add-message:focus {
   outline: none;
 }
