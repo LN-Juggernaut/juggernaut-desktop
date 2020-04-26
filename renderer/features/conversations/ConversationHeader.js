@@ -17,6 +17,8 @@ import { updateConversationFeeLimit } from '../../../utils/db';
 import { queue } from '../../dialogQueue';
 import FeeLimitIcon from '../images/icons/FeeLimitIcon';
 import DeleteConversationIcon from '../images/icons/DeleteConversationIcon';
+import NewChannelIcon from '../images/icons/NewChannelIcon';
+import { showOpenChannelModal } from '../channels/channelsSlice';
 
 const validFeeLimit = feeLimitMSats => {
   const intVal = parseInt(feeLimitMSats, 10);
@@ -30,7 +32,7 @@ const ConversationHeader = props => {
   const [open, setOpen] = React.useState(false);
   const dispatch = useDispatch();
 
-  const { id, color, displayName, feeLimitMSats } = props;
+  const { id, color, displayName, feeLimitMSats, pubkey } = props;
   return (
     <div className="conversationHeader">
       <span>
@@ -107,6 +109,12 @@ const ConversationHeader = props => {
               <ListItemGraphic icon={<DeleteConversationIcon />} />
               Delete Conversation
             </MenuItem>
+            <MenuItem
+              onClick={() => dispatch(showOpenChannelModal({ pubkey }))}
+            >
+              <ListItemGraphic icon={<NewChannelIcon />} />
+              Open Channel
+            </MenuItem>
           </Menu>
           <IconButton
             className="conversation-header-more-icon"
@@ -126,7 +134,8 @@ ConversationHeader.propTypes = {
   id: PropTypes.number.isRequired,
   color: PropTypes.string.isRequired,
   displayName: PropTypes.string.isRequired,
-  feeLimitMSats: PropTypes.number.isRequired
+  feeLimitMSats: PropTypes.number.isRequired,
+  pubkey: PropTypes.string.isRequired
 };
 
 export default ConversationHeader;

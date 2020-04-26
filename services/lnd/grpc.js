@@ -909,19 +909,14 @@ class LndGrpcWrapper extends EventEmitter {
     pubkey,
     localSatoshis,
     remoteSatoshis,
-    targetConfirmations,
-    isPrivate,
-    host
+    targetConfirmations
   }) {
     try {
-      await this.grpc.services.Lightning.connectAndOpen({
-        pubkey,
-        host,
-        localSatoshis,
-        remoteSatoshis,
-        targetConfirmations,
-        isPrivate,
-        spendUnconfirmed: false
+      await this.grpc.services.Lightning.openChannel({
+        node_pubkey: Buffer.from(pubkey, 'hex'),
+        local_funding_amount: localSatoshis + remoteSatoshis,
+        push_sat: remoteSatoshis,
+        target_conf: targetConfirmations
       });
     } catch (e) {
       grpcLog.info('failed to open channel');
