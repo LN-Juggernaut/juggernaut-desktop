@@ -312,6 +312,7 @@
     "devtron": "^1.4.0",
     "dexie": "^2.0.4",
     "electron-is-dev": "^1.1.0",
+    "emoji-mart": "^3.0.0",
     "final-form": "^4.18.6",
     "final-form-arrays": "^3.0.2",
     "final-form-focus": "^1.1.2",

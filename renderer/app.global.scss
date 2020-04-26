@@ -29,6 +29,11 @@
 @import '~@rmwc/data-table/data-table.css';
 @import '~@rmwc/tooltip/tooltip.css';
 @import '~@material/elevation/dist/mdc.elevation.css';
+@import '~emoji-mart/css/emoji-mart.css';
+
+.emoji-mart-bar:first-of-type {
+  display: none;
+}
 
 * {
   margin: 0;

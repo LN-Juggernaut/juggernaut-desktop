@@ -5,9 +5,11 @@ import {
   CircularProgress,
   MenuSurfaceAnchor,
   Menu,
+  MenuSurface,
   MenuItem,
   ListItemGraphic
 } from 'rmwc';
+import { Picker } from 'emoji-mart';
 import { queue } from '../../dialogQueue';
 import PaymentRequestIcon from '../images/icons/PaymentRequestIcon';
 import PaymentIcon from '../images/icons/PaymentIcon';
@@ -21,6 +23,7 @@ const AddMessage = props => {
     saving: false
   });
   const [menuOpen, setMenuOpen] = useState(false);
+  const [emojiMenuOpen, setEmojiMenuOpen] = useState(false);
 
   const handleSendMessage = async messageParams => {
     setState({ ...state, saving: true });
@@ -185,6 +188,37 @@ const AddMessage = props => {
         name="message"
         placeholder="Write a message..."
       />
+      <MenuSurfaceAnchor>
+        <MenuSurface
+          anchorCorner="bottomLeft"
+          open={emojiMenuOpen}
+          focusOnOpen
+          style={{ borderRadius: '10px' }}
+          onMouseLeave={() => {
+            setEmojiMenuOpen(false);
+          }}
+        >
+          <Picker
+            useButton={false}
+            showPreview
+            showSkinTones
+            native
+            title=""
+            skinEmoji="hand"
+            set="twitter"
+            onSelect={emoji => {
+              setState({ ...state, message: state.message + emoji.native });
+            }}
+          />
+        </MenuSurface>
+        <IconButton
+          icon="insert_emoticon"
+          onMouseEnter={() => {
+            setEmojiMenuOpen(true);
+          }}
+        />
+      </MenuSurfaceAnchor>
+
       {state.saving && <IconButton icon={<CircularProgress />} />}
       {!state.saving && (
         <IconButton
