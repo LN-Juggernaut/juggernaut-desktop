@@ -39,6 +39,7 @@ const walletSlice = createSlice({
       state.connecting = true;
       state.connected = false;
       state.locked = false;
+      state.error = null;
     },
     walletLocked(state) {
       state.connecting = false;

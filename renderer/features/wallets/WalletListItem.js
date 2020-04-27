@@ -14,8 +14,12 @@ import { Button } from '../../../utils/forms';
 import { connectWallet } from '../wallet/walletSlice';
 
 const WalletListItem = props => {
-  const { name, host, id, removeWallet, connecting } = props;
+  const { name, host, id, removeWallet, connecting, activeWallet } = props;
   const dispatch = useDispatch();
+
+  const showLaunching = connecting && activeWallet;
+  const showDisabled = connecting && !activeWallet;
+
   return (
     <ListItem>
       <ListItemGraphic icon="offline_bolt" />
@@ -24,14 +28,15 @@ const WalletListItem = props => {
         <ListItemSecondaryText>{`${host}`}</ListItemSecondaryText>
       </ListItemText>
       <ListItemMeta>
-        {connecting && (
+        {showLaunching && (
           <Button disabled label="Launching" icon={<CircularProgress />} />
         )}
-        {!connecting && (
+        {!showLaunching && (
           <Button
             onClick={() => dispatch(connectWallet(id))}
             label="Launch"
             raised
+            disabled={showDisabled}
           />
         )}
         <Button onClick={() => removeWallet(id)} label="Remove" />
@@ -45,7 +50,8 @@ WalletListItem.propTypes = {
   host: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   removeWallet: PropTypes.func.isRequired,
-  connecting: PropTypes.bool.isRequired
+  connecting: PropTypes.bool.isRequired,
+  activeWallet: PropTypes.bool.isRequired
 };
 
 export default WalletListItem;
