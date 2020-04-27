@@ -33,7 +33,7 @@ class WalletList extends Component {
 
     if (!prevError && error) {
       queue.alert({
-        title: 'Failed to launch wallet',
+        title: 'Failed to launch node',
         body:
           'Please make sure you are connected to the internet and your node is online'
       });
