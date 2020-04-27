@@ -135,11 +135,14 @@ button.sendButton {
   .list-item-text {
     flex-grow: 1;
     text-overflow: ellipsis;
-    white-space: nowrap;
     overflow: hidden;
+    white-space: nowrap;
     .alias {
       color: darken($default-text-color, 10%);
       font-weight: 600;
+      text-overflow: ellipsis;
+      width: 70%;
+      overflow: hidden;
     }
 
     .last-message {
