@@ -7,6 +7,7 @@ import Loader from '../common/Loader';
 import routes from '../../constants/routes.json';
 import { fetchWallets, removeWallet, showAddWalletModal } from './walletsSlice';
 import WalletListItem from './WalletListItem';
+import { queue } from '../../dialogQueue';
 
 class WalletList extends Component {
   componentDidMount() {
@@ -15,8 +16,12 @@ class WalletList extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { connected: prevConnected, locked: prevLocked } = prevProps;
-    const { connected, locked, history, walletId } = this.props;
+    const {
+      connected: prevConnected,
+      locked: prevLocked,
+      error: prevError
+    } = prevProps;
+    const { connected, locked, history, walletId, error } = this.props;
 
     if (!prevConnected && connected) {
       history.push(`${routes.WALLETS}/${walletId}/chat`);
@@ -24,6 +29,14 @@ class WalletList extends Component {
 
     if (!prevLocked && locked) {
       history.push(`${routes.WALLETS}/${walletId}/locked`);
+    }
+
+    if (!prevError && error) {
+      queue.alert({
+        title: 'Failed to launch node',
+        body:
+          'Please make sure you are connected to the internet and your node is online'
+      });
     }
   }
 
@@ -33,7 +46,8 @@ class WalletList extends Component {
       loading,
       wallets,
       walletId,
-      showAddWalletModal
+      showAddWalletModal,
+      connecting
     } = this.props;
 
     if (loading) {
@@ -49,7 +63,8 @@ class WalletList extends Component {
             host={wallet.host}
             id={wallet.id}
             removeWallet={removeWallet}
-            connecting={walletId === wallet.id}
+            connecting={connecting}
+            activeWallet={walletId === wallet.id}
           />
         ))}
         <SimpleListItem
@@ -67,6 +82,8 @@ class WalletList extends Component {
 WalletList.propTypes = {
   loading: PropTypes.bool.isRequired,
   walletId: PropTypes.number,
+  error: PropTypes.string,
+  connecting: PropTypes.bool.isRequired,
   connected: PropTypes.bool.isRequired,
   locked: PropTypes.bool.isRequired,
   wallets: PropTypes.arrayOf(
@@ -83,7 +100,8 @@ WalletList.propTypes = {
 };
 
 WalletList.defaultProps = {
-  walletId: null
+  walletId: null,
+  error: null
 };
 
 const mapDispatchToProps = {
@@ -93,15 +111,16 @@ const mapDispatchToProps = {
 };
 
 function mapStateToProps(state) {
-  const { walletId, connected, locked } = state.wallet;
+  const { walletId, connected, locked, connecting, error } = state.wallet;
   return {
     wallets: state.wallets.wallets.map(
       walletId => state.wallets.walletsById[walletId]
     ),
     loading: state.wallets.loading,
-    error: state.wallets.errorr,
+    error,
     walletId,
     connected,
+    connecting,
     locked
   };
 }

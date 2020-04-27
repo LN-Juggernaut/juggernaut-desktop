@@ -6,10 +6,12 @@ import { hot } from 'react-hot-loader/root';
 import { ThemeProvider } from 'rmwc';
 import Routes from '../Routes';
 import { defaultTheme } from '../themes';
+import { DialogQueue, queue } from '../dialogQueue';
 
 const Root = ({ store, history }) => (
   <ThemeProvider options={defaultTheme}>
     <Provider store={store}>
+      <DialogQueue dialogs={queue.dialogs} preventOutsideDismiss />
       <ConnectedRouter history={history}>
         <Routes />
       </ConnectedRouter>

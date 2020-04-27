@@ -13,8 +13,6 @@ import {
   updateSearchQuery
 } from '../conversations/conversationsSlice';
 
-import { DialogQueue, queue } from '../../dialogQueue';
-
 const ChatPage = props => {
   const {
     showNewConversationForm,
@@ -58,7 +56,6 @@ const ChatPage = props => {
           )}
           {!selectedConversationId && <NoConversationSelected />}
         </div>
-        <DialogQueue dialogs={queue.dialogs} preventOutsideDismiss />
       </div>
     </div>
   );
