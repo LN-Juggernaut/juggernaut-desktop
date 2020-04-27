@@ -43,6 +43,7 @@ const PaymentRequestReceiver = props => {
             Pay Request
           </span>
         )}
+        {!response && saving && <Icon className="spin" icon="autorenew" />}
       </div>
       <div className="content-wrapper">
         {wantsOrWanted} you to pay {amountSats} sats

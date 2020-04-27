@@ -192,7 +192,6 @@ const AddMessage = props => {
         <MenuSurface
           anchorCorner="bottomLeft"
           open={emojiMenuOpen}
-          focusOnOpen
           style={{ borderRadius: '10px' }}
           onMouseLeave={() => {
             setEmojiMenuOpen(false);
