@@ -278,9 +278,8 @@ button.sendButton {
 
 .message-content {
   width: 85%;
-  text-overflow: auto;
   white-space: normal;
-  overflow: auto;
+  overflow-wrap: anywhere;
 }
 
 .message-author {
