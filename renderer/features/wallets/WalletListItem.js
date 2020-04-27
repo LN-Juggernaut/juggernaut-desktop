@@ -18,7 +18,7 @@ const WalletListItem = props => {
   const dispatch = useDispatch();
 
   const showLaunching = connecting && activeWallet;
-  const showDisabled = connecting && !activeWallet;
+  const showDisabled = connecting;
 
   return (
     <ListItem>
@@ -29,7 +29,7 @@ const WalletListItem = props => {
       </ListItemText>
       <ListItemMeta>
         {showLaunching && (
-          <Button disabled label="Launching" icon={<CircularProgress />} />
+          <Button label="Launching" icon={<CircularProgress />} />
         )}
         {!showLaunching && (
           <Button
@@ -39,7 +39,11 @@ const WalletListItem = props => {
             disabled={showDisabled}
           />
         )}
-        <Button onClick={() => removeWallet(id)} label="Remove" />
+        <Button
+          onClick={() => removeWallet(id)}
+          disabled={showDisabled}
+          label="Remove"
+        />
       </ListItemMeta>
     </ListItem>
   );
