@@ -20,6 +20,8 @@ export const connectWallet = async walletId => {
 export const disconnectWallet = async () => {
   const lnNode = getNodeInterface();
   lnNode.removeAllListeners('subscribeMessages.data');
+  lnNode.removeAllListeners('subscribeInvoices.data');
+  lnNode.removeAllListeners('paymentSent');
   lnNode.removeAllListeners('subscribeChannelGraph.data');
   lnNode.removeAllListeners('subscribeTransactions.data');
   lnNode.removeAllListeners('subscribeChannelEvents.data');
