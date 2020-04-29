@@ -7,7 +7,6 @@ import Wallet from './Wallet';
 import Fund from '../onboarding/Fund';
 import Connect from '../onboarding/Connect';
 import { fetchWallet } from './walletSlice';
-import Loader from '../common/Loader';
 import LoadingPage from '../common/LoadingPage';
 import ChatPage from '../chat/ChatPage';
 
