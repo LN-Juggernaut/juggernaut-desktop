@@ -29,7 +29,7 @@ if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = 'development';
 }
 
-if(!app.requestSingleInstanceLock()){
+if (!app.requestSingleInstanceLock()) {
   app.quit();
 }
 
@@ -54,8 +54,8 @@ const createWindow = async () => {
     width: 1000,
     height: 550,
     backgroundColor: 'white',
-    minWidth: 1000,
-    minHeight: 550,
+    minWidth: 400,
+    minHeight: 500,
     useContentSize: true,
     webPreferences: {
       nodeIntegration: true,
@@ -114,42 +114,40 @@ const createWindow = async () => {
 
   app.on('activate', () => {
     mainLog.trace('app.activate');
-    if(mainWindow){
+    if (mainWindow) {
       mainWindow.show();
     }
   });
 
   app.on('second-instance', (event, cli) => {
-    if(mainWindow) {
-      if(mainWindow.isMinimized()) {
-        mainWindow.restore()
+    if (mainWindow) {
+      if (mainWindow.isMinimized()) {
+        mainWindow.restore();
       }
-      mainWindow.focus()
+      mainWindow.focus();
     }
-  })
+  });
 
   mainWindow.on('close', event => {
-    mainLog.trace('mainWindow.close')
+    mainLog.trace('mainWindow.close');
     if (os.platform() === 'darwin') {
       if (!mainWindow.forceClose) {
-        event.preventDefault()
+        event.preventDefault();
         if (mainWindow.isFullScreen()) {
           mainWindow.once('leave-full-screen', () => {
-            mainWindow.hide()
-          })
-          mainWindow.setFullScreen(false)
+            mainWindow.hide();
+          });
+          mainWindow.setFullScreen(false);
         } else {
-          mainWindow.hide()
+          mainWindow.hide();
         }
       }
     } else if (!mainWindow.forceClose) {
-      event.preventDefault()
-      mainWindow.hide()
-      app.quit()
+      event.preventDefault();
+      mainWindow.hide();
+      app.quit();
     }
-  })
-
-
+  });
 
   mainLog.info(process.env.NODE_ENV);
 

@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { DataTable, DataTableContent, DataTableBody, Elevation } from 'rmwc';
-import { nodeType } from '../../types';
+import { nodeType, ctaType, ctaDefaults } from '../../types';
 import NodeListItem from './NodeListItem';
 import SimpleNodeListItem from './SimpleNodeListItem';
 import NodeListHeader from './NodeListHeader';
 import EmptyNodeListItem from './EmptyNodeListItem';
 
 const NodeList = props => {
-  const { nodes, query, ctaText, ctaClicked, viewType } = props;
+  const { nodes, query, cta, viewType } = props;
   const NodeListItemComponent =
     viewType === 'advanced' ? NodeListItem : SimpleNodeListItem;
 
@@ -26,12 +26,7 @@ const NodeList = props => {
               <EmptyNodeListItem columns={8} query={query} />
             )}
             {nodes.map(node => (
-              <NodeListItemComponent
-                key={node.pubKey}
-                node={node}
-                ctaText={ctaText}
-                ctaClicked={ctaClicked}
-              />
+              <NodeListItemComponent key={node.pubKey} node={node} cta={cta} />
             ))}
           </DataTableBody>
         </DataTableContent>
@@ -43,9 +38,12 @@ const NodeList = props => {
 NodeList.propTypes = {
   nodes: PropTypes.arrayOf(nodeType).isRequired,
   query: PropTypes.string,
-  ctaText: PropTypes.string.isRequired,
-  ctaClicked: PropTypes.func.isRequired,
+  cta: ctaType,
   viewType: PropTypes.string.isRequired
+};
+
+NodeList.defaultProps = {
+  cta: ctaDefaults
 };
 
 NodeList.defaultProps = {

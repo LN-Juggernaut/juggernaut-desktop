@@ -4,6 +4,7 @@ import { Theme, Typography, IconButton } from 'rmwc';
 import { Link } from 'react-router-dom';
 import BitcoinIcon from '../images/BitcoinIcon';
 import Blob from '../images/Blob';
+import './FixedHeader.scss';
 
 const FixedHeader = props => {
   const {
@@ -38,8 +39,8 @@ const FixedHeader = props => {
       )}
 
       <Theme use={['primaryBg', 'onSecondary']} wrap>
-        <div className="fixed-header-content">
-          <div className="fixed-header-content-text">
+        <div className="content">
+          <div className="text">
             <Typography className="title" use="headline5" tag="h5">
               {title}
             </Typography>
@@ -49,22 +50,14 @@ const FixedHeader = props => {
             </Typography>
           </div>
           <Blob
-            style={{
-              width: '165px',
-              height: '156px',
-              transform: 'scale(1.75)',
-              position: 'absolute',
-              bottom: '-15px',
-              right: '25px',
-              fill: 'rgb(156,122,241)'
-            }}
+            className="blob min-screen-width-800"
             alt="123"
             src="../resources/images/blob-4.png"
           />
-          <div className="fixed-header-content-image">
+          <div className="image">
             {ImageComponent && (
               <ImageComponent
-                className="fixed-header-image-component"
+                className="image-component min-screen-width-800"
                 width={imageWidth}
                 height={imageHeight}
               />

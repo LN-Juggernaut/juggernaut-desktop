@@ -17,9 +17,12 @@ const Connect = () => {
       />
 
       <FilteredNodeList
-        ctaText="Connect"
-        ctaClicked={node => {
-          dispatch(showOpenChannelModal({ pubkey: node.pubKey }));
+        cta={{
+          label: 'Connect',
+          type: 'button',
+          action: node => {
+            dispatch(showOpenChannelModal({ pubkey: node.pubKey }));
+          }
         }}
       />
     </Page>

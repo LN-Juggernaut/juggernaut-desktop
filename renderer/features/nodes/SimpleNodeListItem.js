@@ -1,16 +1,23 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { DataTableRow, DataTableCell, Button, Icon, Avatar } from 'rmwc';
-import { nodeType } from '../../types';
+import {
+  DataTableRow,
+  DataTableCell,
+  Button,
+  Icon,
+  Avatar,
+  IconButton
+} from 'rmwc';
+import OptionalTooltip from '../common/OptionalTooltip';
+import { nodeType, ctaType, ctaDefaults } from '../../types';
 
-const NodeListItem = ({ node, ctaText, ctaClicked }) => {
+const NodeListItem = ({ node, cta }) => {
   const { color, alias, pubKey } = node;
 
-  const buttonClicked = e => {
+  const clickHandler = e => {
     e.preventDefault();
     e.stopPropagation();
     document.activeElement.blur();
-    ctaClicked(node);
+    cta.action(node);
   };
 
   return (
@@ -35,7 +42,25 @@ const NodeListItem = ({ node, ctaText, ctaClicked }) => {
       </DataTableCell>
       <DataTableCell>{pubKey}</DataTableCell>
       <DataTableCell alignEnd>
-        <Button raised label={ctaText} onClick={buttonClicked} />
+        {cta.type === 'button' && (
+          <OptionalTooltip content={cta.tooltip}>
+            <Button
+              raised
+              label={cta.label}
+              icon={cta.icon}
+              onClick={clickHandler}
+            />
+          </OptionalTooltip>
+        )}
+        {cta.type === 'icon' && (
+          <OptionalTooltip content={cta.tooltip}>
+            <IconButton
+              label={cta.label}
+              icon={cta.icon}
+              onClick={clickHandler}
+            />
+          </OptionalTooltip>
+        )}
       </DataTableCell>
     </DataTableRow>
   );
@@ -43,8 +68,10 @@ const NodeListItem = ({ node, ctaText, ctaClicked }) => {
 
 NodeListItem.propTypes = {
   node: nodeType.isRequired,
-  ctaText: PropTypes.string.isRequired,
-  ctaClicked: PropTypes.func.isRequired
+  cta: ctaType
 };
 
+NodeListItem.defaultProps = {
+  cta: ctaDefaults
+};
 export default NodeListItem;

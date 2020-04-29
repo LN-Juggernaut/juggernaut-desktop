@@ -8,6 +8,8 @@ import channelsReducer from './features/channels/channelsSlice';
 import transactionsReducer from './features/transactions/transactionsSlice';
 import peersReducer from './features/peers/peersSlice';
 import nodesReducer from './features/nodes/nodesSlice';
+import chatReducer from './features/chat/chatSlice';
+import appReducer from './features/app/appSlice';
 
 export default function createRootReducer(history) {
   return combineReducers({
@@ -19,6 +21,8 @@ export default function createRootReducer(history) {
     channels: channelsReducer,
     transactions: transactionsReducer,
     peers: peersReducer,
-    nodes: nodesReducer
+    nodes: nodesReducer,
+    chat: chatReducer,
+    app: appReducer
   });
 }

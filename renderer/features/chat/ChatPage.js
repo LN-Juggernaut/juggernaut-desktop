@@ -12,6 +12,7 @@ import {
   hideNewConversationForm,
   updateSearchQuery
 } from '../conversations/conversationsSlice';
+import './ChatPage.scss';
 
 const ChatPage = props => {
   const {
@@ -23,8 +24,23 @@ const ChatPage = props => {
     availableBalance,
     pendingBalance,
     searchQuery,
-    selectedConversationId
+    selectedConversationId,
+    narrow,
+    selectedSide
   } = props;
+
+  const showLeft = !narrow || selectedSide === 'left';
+  const showRight = !narrow || selectedSide === 'right';
+
+  let leftStyle = showLeft ? {} : { display: 'none' };
+  const rightStyle = showRight ? {} : { display: 'none' };
+  if (narrow && showLeft) {
+    leftStyle = {
+      width: '100%',
+      minWidth: '100%',
+      maxWidth: '100%'
+    };
+  }
 
   return (
     <div>
@@ -36,7 +52,7 @@ const ChatPage = props => {
       </Modal>
 
       <div className="chat">
-        <div className="chatLeft">
+        <div className="chat-left" style={leftStyle}>
           <ConversationListHeader
             showNewConversationForm={showNewConversationForm}
             walletId={walletId}
@@ -50,7 +66,8 @@ const ChatPage = props => {
             searchQuery={searchQuery}
           />
         </div>
-        <div className="chatRight">
+
+        <div className="chat-right" style={rightStyle}>
           {selectedConversationId && (
             <SelectedConversation id={selectedConversationId} />
           )}
@@ -70,11 +87,14 @@ ChatPage.propTypes = {
   availableBalance: PropTypes.number.isRequired,
   pendingBalance: PropTypes.number.isRequired,
   searchQuery: PropTypes.string.isRequired,
-  selectedConversationId: PropTypes.number
+  selectedConversationId: PropTypes.number,
+  narrow: PropTypes.bool,
+  selectedSide: PropTypes.string.isRequired
 };
 
 ChatPage.defaultProps = {
-  selectedConversationId: null
+  selectedConversationId: null,
+  narrow: null
 };
 
 const mapStateToProps = state => {
@@ -83,10 +103,14 @@ const mapStateToProps = state => {
     searchQuery,
     selectedConversationId
   } = state.conversations;
+  const { selectedSide } = state.chat;
+  const { narrow } = state.app;
   return {
     newConversationModalVisible,
     searchQuery,
-    selectedConversationId
+    selectedConversationId,
+    narrow,
+    selectedSide
   };
 };
 

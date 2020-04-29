@@ -1,0 +1,49 @@
+.fixed-header {
+  position: relative;
+
+  .blob {
+    width: 165px;
+    height: 156px;
+    transform: scale(1.75);
+    position: absolute;
+    bottom: -15px;
+    right: 25px;
+    fill: rgb(156, 122, 241);
+  }
+
+  .content {
+    margin: 0 auto;
+    color: black;
+    border-radius: 15px;
+    margin-top: 15px;
+    padding: 25px;
+    min-height: 140px;
+    mask-image: url('../../../resources/images/blob-4.png');
+    mask-size: 100% 100%;
+
+    .title {
+      text-transform: uppercase;
+    }
+
+    .details {
+      min-height: 54px;
+      text-align: justify;
+    }
+
+    .text {
+      @media (min-width: 800px) {
+        width: calc(100vw - 300px);
+      }
+    }
+
+    .image {
+      .image-component {
+        position: absolute;
+        bottom: 15px;
+        right: 50px;
+        fill: purple;
+        z-index: 1;
+      }
+    }
+  }
+}

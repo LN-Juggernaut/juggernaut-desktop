@@ -1,11 +1,12 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { showOpenChannelModal } from '../channels/channelsSlice';
 import FilteredNodeList from './FilteredNodeList';
 import { Page, FixedHeader } from '../common';
 import { NodeListIcon } from '../images';
 
-const NodeListPage = () => {
+const NodeListPage = ({ narrow }) => {
   const dispatch = useDispatch();
 
   return (
@@ -16,13 +17,27 @@ const NodeListPage = () => {
         ImageComponent={NodeListIcon}
       />
       <FilteredNodeList
-        ctaText="Open"
-        ctaClicked={node => {
-          dispatch(showOpenChannelModal({ pubkey: node.pubKey }));
+        cta={{
+          label: 'Open',
+          type: 'button',
+          action: node => {
+            dispatch(showOpenChannelModal({ pubkey: node.pubKey }));
+          }
         }}
+        viewType={narrow ? 'simple' : 'advanced'}
       />
     </Page>
   );
 };
 
-export default NodeListPage;
+NodeListPage.propTypes = {
+  narrow: PropTypes.bool.isRequired
+};
+
+const mapStateToProps = state => {
+  return {
+    narrow: state.app.narrow
+  };
+};
+
+export default connect(mapStateToProps)(NodeListPage);
