@@ -114,10 +114,6 @@ const walletSlice = createSlice({
     walletUnlocked(state) {
       state.locked = false;
     },
-    updateAvailableBalance(state, action) {
-      const { balanceAdjustment } = action.payload;
-      state.availableBalance += balanceAdjustment;
-    },
     updateLoadingMessage(state, action) {
       const { message } = action.payload;
       state.loadingMessage = message;
@@ -139,9 +135,8 @@ const walletSlice = createSlice({
       state.chatNodes = null;
       state.loadingChatNodes = false;
     },
-    [newMessage]: (state, action) => {
-      const { message } = action.payload;
-      state.availableBalance += message.amountMSats / 1000;
+    [newMessage]: () => {
+      fetchBalance();
     }
   }
 });
@@ -200,7 +195,7 @@ export const fetchWallet = walletId => {
   };
 };
 
-export const fetchBalance = () => {
+export function fetchBalance() {
   return async dispatch => {
     dispatch(fetchBalanceStart());
 
@@ -211,7 +206,7 @@ export const fetchBalance = () => {
       dispatch(fetchBalanceFailure(e.message));
     }
   };
-};
+}
 
 export const connectWallet = walletId => {
   return async dispatch => {
@@ -223,6 +218,11 @@ export const connectWallet = walletId => {
     const handleMessageSubscription = proxyValue(message =>
       dispatch(receiveMessage(message))
     );
+
+    const handleInvoiceEventData = proxyValue(() => dispatch(fetchBalance()));
+
+    const handeSendPaymentEvent = proxyValue(() => dispatch(fetchBalance()));
+
     const handleChannelGraphSubscription = proxyValue(channelGraphData =>
       dispatch(receiveChannelGraphData(channelGraphData))
     );
@@ -232,9 +232,10 @@ export const connectWallet = walletId => {
       dispatch(fetchBalance());
     });
 
-    const handleChannelEventData = proxyValue(channelEvent =>
-      dispatch(receiveChannelEvent(channelEvent))
-    );
+    const handleChannelEventData = proxyValue(channelEvent => {
+      dispatch(receiveChannelEvent(channelEvent));
+      dispatch(fetchBalance());
+    });
 
     const handlePeerEventData = proxyValue(peerEvent =>
       dispatch(receivePeerEvent(peerEvent))
@@ -243,6 +244,8 @@ export const connectWallet = walletId => {
     const handleWalletActive = proxyValue(() => dispatch(walletActive()));
 
     lnNode.on('subscribeMessages.data', handleMessageSubscription);
+    lnNode.on('subscribeInvoices.data', handleInvoiceEventData);
+    lnNode.on('paymentSent', handeSendPaymentEvent);
     lnNode.on('subscribeChannelGraph.data', handleChannelGraphSubscription);
     lnNode.on('subscribeTransactions.data', handleTransactionData);
     lnNode.on('subscribeChannelEvents.data', handleChannelEventData);

@@ -825,6 +825,7 @@ class LndGrpcWrapper extends EventEmitter {
 
         if (data.state && data.state !== 'IN_FLIGHT') {
           if (data.state === 'SUCCEEDED') {
+            this.emit('paymentSent', data);
             const feeAmountMSats = data.htlcs.reduce((totalFeesMSats, htlc) => {
               return totalFeesMSats + htlc.route.total_fees_msat;
             }, 0);

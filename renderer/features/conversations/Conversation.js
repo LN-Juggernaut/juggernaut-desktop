@@ -9,7 +9,6 @@ import extractMessagePreview from '../../../utils/extractMessagePreview';
 import getNodeInterface from '../../../utils/getNodeInterface';
 import { addMessage, updateMessage } from '../messages/messagesSlice';
 import { newConversationMessage } from './conversationsSlice';
-import { updateAvailableBalance } from '../wallet/walletSlice';
 import { queue } from '../../dialogQueue';
 import errors from '../../constants/errors.json';
 
@@ -55,7 +54,6 @@ const Conversation = props => {
         feeLimitMSats
       );
 
-      const satsSpent = (feeAmountMSats + amountMSats) / 1000;
       if (requestIdentifier && requestIdentifier !== '') {
         const { requestMessage, response } = await createMessageResponse({
           conversationId: id,
@@ -120,12 +118,6 @@ const Conversation = props => {
             balance: messageResponse.balance,
             unreadMessages: messageResponse.unreadMessages,
             conversationId: id
-          })
-        );
-
-        dispatch(
-          updateAvailableBalance({
-            balanceAdjustment: -1 * satsSpent
           })
         );
       }
