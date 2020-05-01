@@ -57,7 +57,8 @@ const search = options => {
     .filter(pubKey => {
       const node = nodes.byPubKey[pubKey];
       return (
-        (node.alias.includes(query) || node.pubKey === query) &&
+        (node.alias.toLowerCase().includes(query.toLowerCase()) ||
+          node.pubKey === query) &&
         !filteredPubKeys.includes(node.pubKey)
       );
     })
