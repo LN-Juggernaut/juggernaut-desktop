@@ -102,18 +102,18 @@ const ConversationHeader = props => {
               Adjust Fee Limit
             </MenuItem>
             <MenuItem
+              onClick={() => dispatch(showOpenChannelModal({ pubkey }))}
+            >
+              <ListItemGraphic icon={<NewChannelIcon />} />
+              Open Channel
+            </MenuItem>{' '}
+            <MenuItem
               onClick={() => {
                 dispatch(removeConversation(id));
               }}
             >
               <ListItemGraphic icon={<DeleteConversationIcon />} />
               Delete Conversation
-            </MenuItem>
-            <MenuItem
-              onClick={() => dispatch(showOpenChannelModal({ pubkey }))}
-            >
-              <ListItemGraphic icon={<NewChannelIcon />} />
-              Open Channel
             </MenuItem>
           </Menu>
           <IconButton
