@@ -21,7 +21,7 @@ const validate = values => {
   const requiredPositiveIntFields = [
     { name: 'localSatoshis', label: 'Local Balance' },
     { name: 'remoteSatoshis', label: 'Remote Balance' },
-    { name: 'targetConfirmations', label: 'Setup Time' }
+    { name: 'targetConfirmations', label: 'Target Confirmations' }
   ];
 
   requiredPositiveIntFields.forEach(field => {
