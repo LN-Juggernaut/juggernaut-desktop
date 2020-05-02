@@ -220,7 +220,7 @@ const AddMessage = props => {
         />
       </MenuSurfaceAnchor>
 
-      {state.saving && <IconButton icon={<CircularProgress />} />}
+      {state.saving && <IconButton disabled icon={<CircularProgress />} />}
       {!state.saving && (
         <IconButton
           icon="flash_on"
