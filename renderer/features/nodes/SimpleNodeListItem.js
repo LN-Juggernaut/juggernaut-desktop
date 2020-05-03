@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { DataTableRow, DataTableCell, Button, Icon, Avatar } from 'rmwc';
-// import { Button } from '../../../utils/forms';
 import { nodeType } from '../../types';
 
 const NodeListItem = ({ node, ctaText, ctaClicked }) => {
@@ -10,6 +9,7 @@ const NodeListItem = ({ node, ctaText, ctaClicked }) => {
   const buttonClicked = e => {
     e.preventDefault();
     e.stopPropagation();
+    document.activeElement.blur();
     ctaClicked(node);
   };
 

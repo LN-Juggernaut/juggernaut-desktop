@@ -182,7 +182,9 @@ const MessageList = props => {
           <IconButton
             icon="expand_more"
             onClick={e => {
+              e.preventDefault();
               e.stopPropagation();
+              document.activeElement.blur();
               scrollToBottom();
             }}
           />

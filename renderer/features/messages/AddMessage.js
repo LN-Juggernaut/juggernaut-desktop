@@ -142,15 +142,16 @@ const AddMessage = props => {
 
   return (
     <div className="addMessageWrapper">
-      <MenuSurfaceAnchor>
+      <MenuSurfaceAnchor
+        onMouseLeave={() => {
+          setMenuOpen(false);
+        }}
+      >
         <Menu
           anchorCorner="bottomLeft"
           open={menuOpen}
           focusOnOpen={false}
           style={{ width: '225px', borderRadius: '10px' }}
-          onMouseLeave={() => {
-            setMenuOpen(false);
-          }}
         >
           <MenuItem onClick={sendPaymentRequest}>
             <ListItemGraphic icon={<PaymentRequestIcon />} />
@@ -188,14 +189,15 @@ const AddMessage = props => {
         name="message"
         placeholder="Write a message..."
       />
-      <MenuSurfaceAnchor>
+      <MenuSurfaceAnchor
+        onMouseLeave={() => {
+          setEmojiMenuOpen(false);
+        }}
+      >
         <MenuSurface
           anchorCorner="bottomLeft"
           open={emojiMenuOpen}
           style={{ borderRadius: '10px' }}
-          onMouseLeave={() => {
-            setEmojiMenuOpen(false);
-          }}
         >
           <Picker
             useButton={false}
@@ -218,7 +220,7 @@ const AddMessage = props => {
         />
       </MenuSurfaceAnchor>
 
-      {state.saving && <IconButton icon={<CircularProgress />} />}
+      {state.saving && <IconButton disabled icon={<CircularProgress />} />}
       {!state.saving && (
         <IconButton
           icon="flash_on"

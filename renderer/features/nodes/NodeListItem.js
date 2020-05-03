@@ -36,6 +36,7 @@ const NodeListItem = ({ node, ctaText, ctaClicked }) => {
   const buttonClicked = e => {
     e.preventDefault();
     e.stopPropagation();
+    document.activeElement.blur();
     ctaClicked(node);
   };
 

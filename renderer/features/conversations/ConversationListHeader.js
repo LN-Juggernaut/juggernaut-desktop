@@ -118,7 +118,9 @@ const ConversationListHeader = props => {
           width="48px"
           height="48px"
           onClick={e => {
+            e.preventDefault();
             e.stopPropagation();
+            document.activeElement.blur();
             setOpen(!open);
           }}
         />

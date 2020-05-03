@@ -70,7 +70,9 @@ const ChannelListItem = props => {
             icon="delete"
             disabled={!active}
             onClick={async e => {
+              e.preventDefault();
               e.stopPropagation();
+              document.activeElement.blur();
               const confirm = await queue.confirm({
                 title: 'Are you sure?',
                 body: 'Are you sure you want to close this channel?',
