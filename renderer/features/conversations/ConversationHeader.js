@@ -120,7 +120,9 @@ const ConversationHeader = props => {
             className="conversation-header-more-icon"
             icon="more_vert"
             onClick={e => {
+              e.preventDefault();
               e.stopPropagation();
+              document.activeElement.blur();
               setOpen(!open);
             }}
           />
