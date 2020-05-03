@@ -26,4 +26,4 @@
 
 ## License
 
-MIT © [Juggernaut](https://github.com/LN-Juggernaut/juggernaut-desktop/LICENSE)
+MIT © [Juggernaut](LICENSE)
