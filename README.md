@@ -1,4 +1,7 @@
 <img src="./resources/images/juggernaut_horizontal.png" width="100%" />
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 <br />
 
 **Juggernaut** utilizes the Lightning Network to provide end-to-end encrypted, onion-routed, censorship resistanst, peer-to-peer messaging with native payment capabilities.
@@ -64,3 +67,22 @@ Currently the only way I've been able to do this for testing is to run one using
 ## License
 
 MIT © [Juggernaut](https://github.com/LN-Juggernaut/juggernaut-desktop/LICENSE)
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/johncantrell97"><img src="https://avatars3.githubusercontent.com/u/41305919?v=4" width="100px;" alt=""/><br /><sub><b>John Cantrell</b></sub></a><br /><a href="https://github.com/LN-Juggernaut/juggernaut-desktop/commits?author=johncantrell97" title="Code">💻</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
