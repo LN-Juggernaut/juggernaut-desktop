@@ -1,7 +1,5 @@
 <img src="./resources/images/juggernaut_horizontal.png" width="100%" />
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
 <br />
 
 **Juggernaut** utilizes the Lightning Network to provide end-to-end encrypted, onion-routed, censorship resistanst, peer-to-peer messaging with native payment capabilities.
@@ -27,7 +25,7 @@ You must first [make the file executable](https://docs.appimage.org/user-guide/r
 
 ## Getting Help / Support
 
-If you are having problems with Juggernaut, please report the issue on [Github](https://github.com/LN-Juggernaut/juggernaut-desktop/issues) or [telegram](https://t.me/beajuggernaut) with screenshots and how to reproduce the issue.
+If you are having problems with Juggernaut, please report the issue on [Github](https://github.com/LN-Juggernaut/juggernaut-desktop/issues) or [Telegram](https://t.me/beajuggernaut) with screenshots and how to reproduce the issue.
 
 ## Requirements
 
@@ -85,6 +83,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
