@@ -1,6 +1,6 @@
 <img src="./resources/images/juggernaut_horizontal.png" width="100%" />
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 <br />
 
@@ -78,6 +78,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="https://github.com/johncantrell97"><img src="https://avatars3.githubusercontent.com/u/41305919?v=4" width="100px;" alt=""/><br /><sub><b>John Cantrell</b></sub></a><br /><a href="https://github.com/LN-Juggernaut/juggernaut-desktop/commits?author=johncantrell97" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/curly60e"><img src="https://avatars3.githubusercontent.com/u/55191248?v=4" width="100px;" alt=""/><br /><sub><b>curly60e</b></sub></a><br /><a href="https://github.com/LN-Juggernaut/juggernaut-desktop/commits?author=curly60e" title="Documentation">📖</a></td>
   </tr>
 </table>
 
