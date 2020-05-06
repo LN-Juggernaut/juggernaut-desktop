@@ -26,6 +26,7 @@ export const saveMessageToDatabase = async ({
   amountMSats,
   feeAmountMSats,
   unread,
+  valid,
   requestIdentifier,
   walletId
 }) => {
@@ -49,6 +50,7 @@ export const saveMessageToDatabase = async ({
     contentType,
     createdAt,
     unread,
+    valid,
     preimage,
     settleIndex,
     amountMSats,

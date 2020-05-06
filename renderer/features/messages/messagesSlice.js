@@ -27,6 +27,7 @@ const messagesSlice = createSlice({
         receiverPubkey,
         preimage,
         unread,
+        valid,
         createdAt,
         amountMSats,
         feeAmountMSats
@@ -53,6 +54,7 @@ const messagesSlice = createSlice({
         receiverPubkey,
         preimage,
         unread,
+        valid,
         createdAt,
         amountMSats,
         feeAmountMSats

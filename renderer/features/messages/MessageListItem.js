@@ -1,13 +1,14 @@
 import React from 'react';
 import moment from 'moment';
 import PropTypes from 'prop-types';
-import { Avatar } from 'rmwc';
+import { Avatar, Tooltip } from 'rmwc';
 import { messageType } from '../../types';
 import MessageText from './MessageText';
 import PaymentReceiver from './PaymentReceiver';
 import PaymentSender from './PaymentSender';
 import PaymentRequestReceiver from './PaymentRequestReceiver';
 import PaymentRequestSender from './PaymentRequestSender';
+import WarningIcon from '../images/icons/WarningIcon';
 
 const MessageListItem = props => {
   const {
@@ -26,6 +27,7 @@ const MessageListItem = props => {
     feeAmountMSats,
     contentType,
     amountMSats,
+    valid,
     response
   } = message;
   const feeAmountSats = parseFloat(feeAmountMSats / 1000);
@@ -84,6 +86,22 @@ const MessageListItem = props => {
         {fromMe && feeAmountSats > 0 && (
           <div className="message-fee-wrapper">
             <span className="message-fee">-{feeAmountSats} sat</span>
+          </div>
+        )}
+        {!valid && (
+          <div className="invalid-message-wrapper">
+            <span className="invalid-message">
+              <Tooltip
+                content={
+                  <div style={{ padding: '10px' }}>
+                    This message was received from an unknown client and
+                    Juggernaut could not verify the sender
+                  </div>
+                }
+              >
+                <WarningIcon />
+              </Tooltip>
+            </span>
           </div>
         )}
       </div>
