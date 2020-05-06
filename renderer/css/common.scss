@@ -7,46 +7,10 @@
   background-color: $page-bg-color;
 }
 
-.fixed-header {
-  position: relative;
-}
-
 .scrollable-content {
   flex-grow: 1;
   min-height: 0;
   overflow: auto;
-}
-
-.fixed-header-content {
-  margin: 0 auto;
-  color: black;
-  border-radius: 15px;
-  margin-top: 15px;
-  padding: 25px;
-  text-align: left;
-  min-height: 140px;
-  mask-image: url('../resources/images/blob-4.png');
-  mask-size: 100% 100%;
-}
-
-.fixed-header-content-text {
-  width: calc(100vw - 400px);
-}
-
-.fixed-header-content-image .fixed-header-image-component {
-  position: absolute;
-  bottom: 15px;
-  right: 50px;
-  fill: purple;
-  z-index: 1;
-}
-
-.fixed-header-content .title {
-  text-transform: uppercase;
-}
-
-.fixed-header-content .details {
-  min-height: 54px;
 }
 
 .elevated-search {

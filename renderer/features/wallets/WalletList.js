@@ -45,7 +45,6 @@ class WalletList extends Component {
       removeWallet,
       loading,
       wallets,
-      walletId,
       showAddWalletModal,
       connecting
     } = this.props;
@@ -55,7 +54,7 @@ class WalletList extends Component {
     }
 
     return (
-      <List twoLine>
+      <List twoLine nonInteractive={connecting}>
         {wallets.map(wallet => (
           <WalletListItem
             key={wallet.id}
@@ -64,7 +63,6 @@ class WalletList extends Component {
             id={wallet.id}
             removeWallet={removeWallet}
             connecting={connecting}
-            activeWallet={walletId === wallet.id}
           />
         ))}
         <SimpleListItem
@@ -72,7 +70,8 @@ class WalletList extends Component {
           text="Add Node"
           secondaryText="Connect a new lightning node to Juggernaut"
           metaIcon=""
-          onClick={() => showAddWalletModal()}
+          onClick={() => !connecting && showAddWalletModal()}
+          disabled={connecting}
         />
       </List>
     );

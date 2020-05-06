@@ -52,7 +52,7 @@ const NodeListHeader = () => {
           }
         >
           <DataTableHeadCell className="node-list-header-cell">
-            Min Fee
+            Min Fee (sats)
           </DataTableHeadCell>
         </Tooltip>
         <Tooltip
@@ -64,7 +64,7 @@ const NodeListHeader = () => {
           }
         >
           <DataTableHeadCell className="node-list-header-cell">
-            Min Amt
+            Min Amt (sats)
           </DataTableHeadCell>
         </Tooltip>
         <Tooltip
@@ -76,7 +76,7 @@ const NodeListHeader = () => {
           }
         >
           <DataTableHeadCell className="node-list-header-cell">
-            Capacity
+            Capacity (sats)
           </DataTableHeadCell>
         </Tooltip>
         <DataTableHeadCell className="node-list-header-cell">

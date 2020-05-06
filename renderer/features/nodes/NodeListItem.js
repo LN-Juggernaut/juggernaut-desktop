@@ -1,16 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { DataTableRow, DataTableCell, Button } from 'rmwc';
-import { nodeType } from '../../types';
+import { DataTableRow, DataTableCell, Button, IconButton } from 'rmwc';
+import { nodeType, ctaType, ctaDefaults } from '../../types';
+import OptionalTooltip from '../common/OptionalTooltip';
 
-const NodeListItem = ({ node, ctaText, ctaClicked }) => {
+const NodeListItem = ({ node, cta }) => {
   const { alias, pubKey, twoHopNodes, stats } = node;
 
-  const pluralString = (value, str) =>
-    value === 1
-      ? `${Intl.NumberFormat().format(value)} ${str}`
-      : `${Intl.NumberFormat().format(value)} ${str}s`;
   const isUnknownValue = value => {
     return (
       isNaN(value) ||
@@ -19,25 +15,22 @@ const NodeListItem = ({ node, ctaText, ctaClicked }) => {
     );
   };
 
-  const displayValue = (value, str) => {
+  const displayValue = value => {
     if (isUnknownValue(value)) {
       return 'Unknown';
     }
-    return pluralString(value, str);
+    return Intl.NumberFormat().format(value);
   };
 
-  const feeSats = displayValue(
-    parseInt(stats.minFeeMsat.min, 10) / 1000,
-    'sat'
-  );
-  const minSats = displayValue(stats.minHtlcMsat.min / 1000, 'sat');
-  const capacitySats = displayValue(stats.capacity.sum, 'sat');
+  const feeSats = displayValue(parseInt(stats.minFeeMsat.min, 10) / 1000);
+  const minSats = displayValue(stats.minHtlcMsat.min / 1000);
+  const capacitySats = displayValue(stats.capacity.sum);
 
-  const buttonClicked = e => {
+  const clickHandler = e => {
     e.preventDefault();
     e.stopPropagation();
     document.activeElement.blur();
-    ctaClicked(node);
+    cta.action(node);
   };
 
   return (
@@ -51,7 +44,25 @@ const NodeListItem = ({ node, ctaText, ctaClicked }) => {
       <DataTableCell>{minSats}</DataTableCell>
       <DataTableCell>{capacitySats}</DataTableCell>
       <DataTableCell>
-        <Button raised label={ctaText} onClick={buttonClicked} />
+        {cta.type === 'button' && (
+          <OptionalTooltip content={cta.tooltip}>
+            <Button
+              raised
+              label={cta.label}
+              icon={cta.icon}
+              onClick={clickHandler}
+            />
+          </OptionalTooltip>
+        )}
+        {cta.type === 'icon' && (
+          <OptionalTooltip content={cta.tooltip}>
+            <IconButton
+              label={cta.label}
+              icon={cta.icon}
+              onClick={clickHandler}
+            />
+          </OptionalTooltip>
+        )}
       </DataTableCell>
     </DataTableRow>
   );
@@ -59,8 +70,11 @@ const NodeListItem = ({ node, ctaText, ctaClicked }) => {
 
 NodeListItem.propTypes = {
   node: nodeType.isRequired,
-  ctaText: PropTypes.string.isRequired,
-  ctaClicked: PropTypes.func.isRequired
+  cta: ctaType
+};
+
+NodeListItem.defaultProps = {
+  cta: ctaDefaults
 };
 
 export default connect(null)(NodeListItem);

@@ -16,9 +16,12 @@ const NodeListPage = () => {
         ImageComponent={NodeListIcon}
       />
       <FilteredNodeList
-        ctaText="Open"
-        ctaClicked={node => {
-          dispatch(showOpenChannelModal({ pubkey: node.pubKey }));
+        cta={{
+          label: 'Open',
+          type: 'button',
+          action: node => {
+            dispatch(showOpenChannelModal({ pubkey: node.pubKey }));
+          }
         }}
       />
     </Page>

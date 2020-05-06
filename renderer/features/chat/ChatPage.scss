@@ -1,0 +1,26 @@
+@import '../../css/variables.scss';
+
+.chat {
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  overflow: hidden;
+
+  .chat-left {
+    border-right: 1px solid $chat-section-separator-color;
+    width: 300px;
+    min-width: 300px;
+    max-width: 300px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .chat-right {
+    height: 100vh;
+    flex-grow: 1;
+  }
+}

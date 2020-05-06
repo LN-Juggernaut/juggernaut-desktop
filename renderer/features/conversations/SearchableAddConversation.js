@@ -9,7 +9,9 @@ import {
   selectConversation
 } from './conversationsSlice';
 import { createConversation } from '../../../utils/db';
-import { NewConversationIcon } from '../images';
+import { NewConversationIcon as HeaderNewConversationIcon } from '../images';
+import NewConversationIcon from '../images/icons/NewConversationIcon';
+import { switchSide } from '../chat/chatSlice';
 
 const SearchableAddConversation = ({ walletId }) => {
   const dispatch = useDispatch();
@@ -24,6 +26,7 @@ const SearchableAddConversation = ({ walletId }) => {
     dispatch(addConversation(conversation));
     dispatch(hideNewConversationForm());
     dispatch(selectConversation(conversation));
+    dispatch(switchSide({ side: 'right' }));
   };
 
   return (
@@ -31,12 +34,16 @@ const SearchableAddConversation = ({ walletId }) => {
       <FixedHeader
         title="Start New Conversation"
         details="Search for someone to chat with using their alias or public key."
-        ImageComponent={NewConversationIcon}
+        ImageComponent={HeaderNewConversationIcon}
       />
 
       <FilteredNodeList
-        ctaText="Start Conversation"
-        ctaClicked={handleNewConversation}
+        cta={{
+          type: 'icon',
+          icon: <NewConversationIcon />,
+          action: handleNewConversation,
+          tooltip: 'Start Conversation'
+        }}
         viewType="simple"
         filterConversations
       />
