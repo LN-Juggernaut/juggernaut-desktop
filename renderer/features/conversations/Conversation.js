@@ -66,7 +66,8 @@ const Conversation = props => {
           contentType,
           requestIdentifier,
           amountMSats: amountMSats * -1,
-          unread: false
+          unread: false,
+          valid: true
         });
 
         dispatch(
@@ -88,7 +89,8 @@ const Conversation = props => {
           contentType,
           requestIdentifier,
           amountMSats: amountMSats * -1,
-          unread: false
+          unread: false,
+          valid: true
         });
 
         dispatch(
@@ -102,6 +104,7 @@ const Conversation = props => {
             contentType,
             requestIdentifier,
             unread: false,
+            valid: true,
             amountMSats: messageResponse.amountMSats,
             feeAmountMSats: messageResponse.feeAmountMSats,
             createdAt

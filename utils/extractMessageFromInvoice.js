@@ -32,7 +32,7 @@ const extractMessageFromInvoice = invoice => {
 
   const contentType = contentTypeBytes
     ? contentTypeBytes.toString('utf8')
-    : null;
+    : 'text';
 
   const senderPubkey = senderBytes ? senderBytes.toString('hex') : null;
 

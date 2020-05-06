@@ -110,8 +110,6 @@ class LndGrpcWrapper extends EventEmitter {
     return this.wallet;
   }
 
-  async;
-
   /* eslint-disable no-await-in-loop */
   async getValidMessageFromPayment(payment) {
     if (payment.status !== 'SUCCEEDED') {
@@ -144,7 +142,8 @@ class LndGrpcWrapper extends EventEmitter {
       feeAmountMSats,
       receiverPubkey,
       senderPubkey,
-      unread: false
+      unread: false,
+      valid: true
     };
   }
 
@@ -197,9 +196,6 @@ class LndGrpcWrapper extends EventEmitter {
 
     const { signatureBytes: signature } = message;
     const validMessage = await this.isValidMessage(signData, signature);
-    if (!validMessage) {
-      return null;
-    }
 
     const {
       senderPubkey,
@@ -224,6 +220,7 @@ class LndGrpcWrapper extends EventEmitter {
       settleIndex,
       amountMSats,
       feeAmountMSats,
+      valid: validMessage,
       unread: true
     };
   }
