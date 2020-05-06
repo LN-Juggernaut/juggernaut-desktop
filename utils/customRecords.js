@@ -6,21 +6,12 @@ const tlvContentType = 34349345;
 const tlvRequestIdentifier = 34349347;
 const tlvKeySendRecord = 5482373484;
 
-const juggernautTLVRecords = [
-  tlvMsgRecord,
-  tlvSigRecord,
-  tlvSenderRecord,
-  tlvTimeRecord,
-  tlvContentType,
-  tlvRequestIdentifier,
-  tlvKeySendRecord
-].map(key => key.toString());
-
 export function decodeCustomRecords(customRecords) {
   const records = {};
   if (!customRecords) {
     return records;
   }
+
   Object.keys(customRecords).forEach(key => {
     if (Buffer.byteLength(key, 'ascii') >= 8) {
       const intKey = Buffer.from(key, 'ascii').readBigUInt64LE();
@@ -37,13 +28,10 @@ export function validCustomRecords(customRecords) {
   if (!customRecords) {
     return false;
   }
-  const validKeysCount = Object.keys(customRecords).reduce((count, key) => {
-    if (juggernautTLVRecords.indexOf(key) >= 0) {
-      return count + 1;
-    }
-    return count;
-  }, 0);
-  return validKeysCount >= 5;
+  const hasMessage = tlvMsgRecord in customRecords;
+  const hasSender = tlvSenderRecord in customRecords;
+
+  return hasMessage && hasSender;
 }
 
 export function parseCustomRecords(customRecords) {
@@ -51,7 +39,7 @@ export function parseCustomRecords(customRecords) {
   const signatureBytes = customRecords[tlvSigRecord] || Buffer.from('');
   const timestampBytes = customRecords[tlvTimeRecord] || Buffer.from('');
   const senderBytes = customRecords[tlvSenderRecord] || Buffer.from('');
-  const contentTypeBytes = customRecords[tlvContentType] || Buffer.from('');
+  const contentTypeBytes = customRecords[tlvContentType] || Buffer.from('text');
   const requestIdentifierBytes =
     customRecords[tlvRequestIdentifier] || Buffer.from('');
 

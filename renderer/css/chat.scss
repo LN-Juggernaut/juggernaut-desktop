@@ -328,3 +328,8 @@ button.sendButton {
   border: 1px solid $chat-scroll-to-bottom-border-color;
   text-align: center;
 }
+
+.invalid-message svg {
+  width: 25px;
+  color: $primary-color;
+}

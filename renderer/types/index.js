@@ -9,6 +9,7 @@ export const messageType = shape({
   receiverPubkey: string.isRequired,
   content: string.isRequired,
   unread: bool.isRequired,
+  valid: bool.isRequired,
   amountMSats: number.isRequired,
   feeAmountMSats: number.isRequired,
   response: shape({
