@@ -1,4 +1,14 @@
-import { shape, number, string, bool, arrayOf } from 'prop-types';
+import {
+  shape,
+  number,
+  string,
+  bool,
+  arrayOf,
+  oneOf,
+  func,
+  oneOfType,
+  node
+} from 'prop-types';
 
 export const messageType = shape({
   id: number.isRequired,
@@ -206,3 +216,17 @@ export const nodeDetailsType = shape({
   pendingChannels: arrayOf(pendingChannelType),
   peer: peerType
 });
+
+export const ctaType = shape({
+  type: oneOf(['button', 'icon']).isRequired,
+  action: func.isRequired,
+  label: string,
+  icon: oneOfType([string, node]),
+  tooltip: string
+});
+
+export const ctaDefaults = {
+  label: null,
+  icon: null,
+  tooltip: null
+};

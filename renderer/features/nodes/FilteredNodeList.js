@@ -7,11 +7,11 @@ import NodeList from './NodeList';
 import NodeListFilter from './NodeListFilter';
 import { fetchNodes } from './nodesSlice';
 import graphIndex from '../../../utils/graphIndex';
+import { ctaType, ctaDefaults } from '../../types';
 
 const FilteredNodeList = props => {
   const {
-    ctaText,
-    ctaClicked,
+    cta,
     loading,
     fetchNodes,
     viewType,
@@ -50,20 +50,13 @@ const FilteredNodeList = props => {
   return (
     <>
       <NodeListFilter query={query} setNodeQuery={updateQuery} />
-      <NodeList
-        query={query}
-        nodes={nodes}
-        ctaText={ctaText}
-        ctaClicked={ctaClicked}
-        viewType={viewType}
-      />
+      <NodeList query={query} nodes={nodes} cta={cta} viewType={viewType} />
     </>
   );
 };
 
 FilteredNodeList.propTypes = {
-  ctaText: PropTypes.string.isRequired,
-  ctaClicked: PropTypes.func.isRequired,
+  cta: ctaType,
   loading: PropTypes.bool.isRequired,
   fetchNodes: PropTypes.func.isRequired,
   viewType: PropTypes.string,
@@ -73,7 +66,8 @@ FilteredNodeList.propTypes = {
 
 FilteredNodeList.defaultProps = {
   viewType: 'advanced',
-  lastFetch: null
+  lastFetch: null,
+  cta: ctaDefaults
 };
 
 const mapStateToProps = (state, props) => {

@@ -56,6 +56,12 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.min-screen-width-800 {
+  @media (max-width: 800px) {
+    display: none;
+  }
+}
+
 .mdc-elevation--z4 {
   background-color: white;
 }
@@ -81,7 +87,6 @@ code {
 @import './css/common.scss';
 @import './css/chat.scss';
 @import './css/channels.scss';
-@import './css/connect.scss';
 @import './css/conversationdetail.scss';
 @import './css/fund.scss';
 @import './css/modal.scss';

@@ -1,28 +1,3 @@
-.chat {
-  position: relative;
-  display: flex;
-  flex-wrap: nowrap;
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  overflow: hidden;
-}
-
-.chatLeft {
-  border-right: 1px solid $chat-section-separator-color;
-  width: $chat-left-width;
-  min-width: $chat-left-width;
-  max-width: $chat-left-width;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.chatRight {
-  height: 100vh;
-  flex-grow: 1;
-}
-
 .conversationListHeader {
   display: flex;
   align-items: center;
@@ -78,10 +53,6 @@ input.add-message:focus {
 
 button.sendButton {
   color: $chat-send-message-button-color;
-}
-
-.conversation-header-more-icon {
-  color: $primary-color;
 }
 
 .search {
@@ -219,20 +190,6 @@ button.sendButton {
   font-size: 14px;
   color: $default-text-color;
   font-weight: bold;
-}
-
-.conversationHeader {
-  display: flex;
-  border-bottom: 1px solid $chat-section-separator-color;
-  height: 50px;
-  align-items: center;
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
-.conversationHeaderAlias {
-  flex-grow: 1;
-  padding-left: 10px;
 }
 
 .avatar {

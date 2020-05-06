@@ -6,6 +6,7 @@ import {
 } from '../../../utils/db';
 import { logout } from '../common/actions';
 import getNodeInterface from '../../../utils/getNodeInterface';
+import { switchSide } from '../chat/chatSlice';
 
 const conversationsSlice = createSlice({
   name: 'conversations',
@@ -181,6 +182,7 @@ export const removeConversation = conversationId => {
     try {
       await deleteConversation(conversationId);
       dispatch(removeConversationSuccess({ id: conversationId }));
+      dispatch(switchSide({ side: 'left' }));
     } catch (e) {
       dispatch(removeConversationFailure({ error: e.message }));
     }

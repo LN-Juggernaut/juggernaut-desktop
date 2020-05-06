@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Avatar } from 'rmwc';
 import { conversationType } from '../../types';
+import { switchSide } from '../chat/chatSlice';
 
 class ConversationListItem extends Component {
   render() {
-    const { conversation, selected, select, id } = this.props;
+    const { conversation, selected, select, id, switchSide } = this.props;
     const {
       color,
       displayName,
@@ -38,7 +40,10 @@ class ConversationListItem extends Component {
     return (
       <div
         onKeyPress={() => {}}
-        onClick={() => select({ id })}
+        onClick={() => {
+          select({ id });
+          switchSide({ side: 'right' });
+        }}
         className={className}
       >
         <div className="list-item-graphic">
@@ -75,7 +80,12 @@ ConversationListItem.propTypes = {
   conversation: conversationType.isRequired,
   selected: PropTypes.bool.isRequired,
   select: PropTypes.func.isRequired,
-  id: PropTypes.number.isRequired
+  id: PropTypes.number.isRequired,
+  switchSide: PropTypes.func.isRequired
 };
 
-export default ConversationListItem;
+const mapDispatchToProps = {
+  switchSide
+};
+
+export default connect(null, mapDispatchToProps)(ConversationListItem);

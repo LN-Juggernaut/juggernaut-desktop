@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import {
+  IconButton,
   ListItem,
   ListItemGraphic,
   ListItemText,
@@ -10,39 +11,59 @@ import {
   ListItemMeta,
   CircularProgress
 } from 'rmwc';
-import { Button } from '../../../utils/forms';
 import { connectWallet } from '../wallet/walletSlice';
+import { queue } from '../../dialogQueue';
 
 const WalletListItem = props => {
-  const { name, host, id, removeWallet, connecting, activeWallet } = props;
+  const { name, host, id, removeWallet, connecting } = props;
   const dispatch = useDispatch();
 
-  const showLaunching = connecting && activeWallet;
-  const showDisabled = connecting;
+  const [thisWalletConnecting, setThisWalletConnecting] = useState(false);
+
+  useEffect(() => {
+    if (!connecting) {
+      setThisWalletConnecting(false);
+    }
+  }, [connecting]);
 
   return (
-    <ListItem>
+    <ListItem
+      onClick={e => {
+        e.preventDefault();
+        e.stopPropagation();
+        document.activeElement.blur();
+        if (!connecting) {
+          dispatch(connectWallet(id));
+          setThisWalletConnecting(true);
+        }
+      }}
+    >
       <ListItemGraphic icon="offline_bolt" />
       <ListItemText>
         <ListItemPrimaryText>{name}</ListItemPrimaryText>
         <ListItemSecondaryText>{`${host}`}</ListItemSecondaryText>
       </ListItemText>
       <ListItemMeta>
-        {showLaunching && (
-          <Button label="Launching" icon={<CircularProgress />} />
+        {thisWalletConnecting && (
+          <IconButton disabled icon={<CircularProgress />} />
         )}
-        {!showLaunching && (
-          <Button
-            onClick={() => dispatch(connectWallet(id))}
-            label="Launch"
-            raised
-            disabled={showDisabled}
-          />
-        )}
-        <Button
-          onClick={() => removeWallet(id)}
-          disabled={showDisabled}
-          label="Remove"
+        <IconButton
+          icon="delete"
+          disabled={connecting}
+          onClick={async e => {
+            e.preventDefault();
+            e.stopPropagation();
+            document.activeElement.blur();
+            const confirm = await queue.confirm({
+              title: 'Are you sure?',
+              body: 'Are you sure you want to remove this wallet?',
+              acceptLabel: 'Yes'
+            });
+
+            if (confirm) {
+              removeWallet(id);
+            }
+          }}
         />
       </ListItemMeta>
     </ListItem>
@@ -54,8 +75,7 @@ WalletListItem.propTypes = {
   host: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   removeWallet: PropTypes.func.isRequired,
-  connecting: PropTypes.bool.isRequired,
-  activeWallet: PropTypes.bool.isRequired
+  connecting: PropTypes.bool.isRequired
 };
 
 export default WalletListItem;
