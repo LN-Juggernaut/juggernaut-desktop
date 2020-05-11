@@ -301,6 +301,7 @@
     "@hot-loader/react-dom": "^16.11.0",
     "@ln-juggernaut/lnd-grpc": "0.4.0-beta.10",
     "@reduxjs/toolkit": "^1.1.0",
+    "bip21": "^2.0.3",
     "bitcoinjs-lib": "^5.1.7",
     "bolt11": "^1.2.7",
     "comlinkjs": "^3.2.0",
