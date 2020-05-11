@@ -13,6 +13,7 @@ import { app, BrowserWindow, screen } from 'electron';
 import isDev from 'electron-is-dev';
 import path from 'path';
 import os from 'os';
+import bip21 from 'bip21';
 import installExtension, {
   REACT_DEVELOPER_TOOLS,
   REDUX_DEVTOOLS
@@ -24,6 +25,7 @@ import JuggernautUpdater from './updater';
 
 let mainWindow = null;
 let juggernaut = null;
+let protocolUrl = null;
 
 if (!process.env.NODE_ENV) {
   process.env.NODE_ENV = 'development';
@@ -32,6 +34,39 @@ if (!process.env.NODE_ENV) {
 if (!app.requestSingleInstanceLock()) {
   app.quit();
 }
+
+const handleBitcoinLink = link => {
+  try {
+    const decodedLink = bip21.decode(link);
+    juggernaut.sendMessage('bitcoinLinkClicked', decodedLink);
+    mainWindow.show();
+  } catch (e) {}
+};
+
+const handleLightningLink = link => {
+  try {
+    const paymentRequest = link.split(':')[1];
+    juggernaut.sendMessage('lightningLinkClicked', { paymentRequest });
+    mainWindow.show();
+  } catch (e) {}
+};
+
+const protocolHandlers = {
+  bitcoin: handleBitcoinLink,
+  lightning: handleLightningLink
+};
+
+const handleOpenUrl = url => {
+  if (mainWindow) {
+    const [protocol] = url.split(':');
+    const handler = protocolHandlers[protocol];
+    if (handler) {
+      handler(url);
+    }
+  } else {
+    protocolUrl = url;
+  }
+};
 
 const installExtensions = async () => {
   const installer = require('electron-devtools-installer');
@@ -88,6 +123,14 @@ const createWindow = async () => {
     juggernaut.mainWindow = null;
   });
 
+  mainWindow.webContents.on('did-finish-load', () => {
+    const url = protocolUrl || process.argv.slice(1)[0];
+    if (url) {
+      handleOpenUrl(url);
+      protocolUrl = null;
+    }
+  });
+
   app.on('before-quit', event => {
     mainLog.trace('app.before-quit');
     if (mainWindow && !mainWindow.forceClose) {
@@ -120,6 +163,18 @@ const createWindow = async () => {
   });
 
   app.on('second-instance', (event, cli) => {
+    const getUrl = () => {
+      const protocols = Object.keys(protocolHandlers);
+      const isKnownProtocol = value =>
+        protocols.find(protocol => value.indexOf(`${protocol}:`) === 0);
+      return cli.find((value, index) => index > 0 && isKnownProtocol(value));
+    };
+    if (os.platform !== 'darwin') {
+      const url = cli && getUrl();
+      if (url) {
+        handleOpenUrl(url);
+      }
+    }
     if (mainWindow) {
       if (mainWindow.isMinimized()) {
         mainWindow.restore();
@@ -185,4 +240,14 @@ const createWindow = async () => {
   });
 };
 
+app.on('will-finish-launching', () => {
+  app.on('open-url', (event, url) => {
+    event.preventDefault();
+    handleOpenUrl(url);
+  });
+});
+
 app.on('ready', createWindow);
+
+app.setAsDefaultProtocolClient('bitcoin');
+app.setAsDefaultProtocolClient('lightning');

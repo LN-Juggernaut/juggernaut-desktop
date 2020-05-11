@@ -28,3 +28,23 @@ export const terminateApp = () => {
     }
   };
 };
+
+export const bitcoinLinkClicked = (event, { address, options = {} }) => {
+  return async dispatch => {
+    const { lightning } = options;
+    if (lightning) {
+      dispatch(lightningLinkClicked(event, { paymentRequest: lightning }));
+    } else {
+      const { amount } = options;
+      console.log(`user wants to send ${amount} BTC to ${address}`);
+    }
+  };
+};
+
+export const lightningLinkClicked = (event, { paymentRequest }) => {
+  return async () => {
+    console.log(
+      `user wants to pay a lightning payment request ${paymentRequest}`
+    );
+  };
+};

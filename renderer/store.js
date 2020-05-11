@@ -4,13 +4,21 @@ import { routerMiddleware, routerActions } from 'connected-react-router';
 import { createLogger } from 'redux-logger';
 import createIpc from 'redux-electron-ipc';
 import createRootReducer from './rootReducer';
-import { terminateApp } from './features/app/appSlice';
+import {
+  terminateApp,
+  bitcoinLinkClicked,
+  lightningLinkClicked
+} from './features/app/appSlice';
 
 export const history = createHashHistory();
 const rootReducer = createRootReducer(history);
 const router = routerMiddleware(history);
 
-const ipc = createIpc({ terminateApp });
+const ipc = createIpc({
+  terminateApp,
+  bitcoinLinkClicked,
+  lightningLinkClicked
+});
 
 const middleware = [...getDefaultMiddleware(), router, ipc];
 let devTools = false;
