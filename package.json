@@ -299,7 +299,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.12.0",
     "@hot-loader/react-dom": "^16.11.0",
-    "@ln-juggernaut/lnd-grpc": "0.4.0-beta.10",
+    "@ln-juggernaut/lnd-grpc": "0.5.2",
     "@reduxjs/toolkit": "^1.1.0",
     "bitcoinjs-lib": "^5.1.7",
     "bolt11": "^1.2.7",
